@@ -1,0 +1,50 @@
+.mat-list-icon {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.text{
+  color:#DD000000;
+}
+
+.text.display{
+  font-size: 34px;
+}
+
+.text.headline{
+  font-size: 24px;
+}
+
+.text.title{
+  font-size: 20px;
+}
+
+.text.subhead{
+  font-size: 16px;
+}
+
+.text.body{
+  font-size: 14px;
+}
+
+.text.caption{
+  font-size: 12px;
+}
+
+md-sidenav{
+  width:300px;
+  transition: 0.2s all;
+}
+
+md-card {
+  display: inline-block;
+}
+
+html, body, material-app, md-sidenav-container, .app-content {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+md-sidenav a.mat-list-item{
+  text-decoration: none !important;
+}
