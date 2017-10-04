@@ -1,19 +1,26 @@
+import { User } from '../model/user';
+import { IAppState } from '../store';
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { select, NgRedux } from '@angular-redux/store';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
 
-  constructor(private router: Router) { }
+  @select('user') user;
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (localStorage.getItem('currentUser')) {
-      // logged in so return true
-      return true;
-    }
+  authenticated: boolean;
 
-    // not logged in so redirect to login page with the return url
-    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
-    return false;
+  constructor(private ngRedux: NgRedux<IAppState>, private router: Router) { }
+
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+    return this.ngRedux.select(['user']).map((user: User) => {
+      if (user == null) {
+        console.log('no user logged, redirect to login');
+        this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
+      }
+      return user != null;
+    });
   }
 }

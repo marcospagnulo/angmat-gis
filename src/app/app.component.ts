@@ -8,7 +8,7 @@ import { IAppState } from './store/index';
   template:
   `
     <!-- Toolbar -->
-    <md-toolbar color="primary" class="large-padding">
+    <md-toolbar color="primary" class="large-padding" *authorized>
       <button md-icon-button (click)="sidenav.toggle()">
         <md-icon>menu</md-icon>
       </button>
@@ -18,7 +18,7 @@ import { IAppState } from './store/index';
     <md-sidenav-container>
 
       <!-- Sidenav -->
-      <md-sidenav #sidenav mode="side" opened="true">
+      <md-sidenav #sidenav mode="side" opened="true" *authorized>
         <md-list>
           <a routerLink="/home" routerLinkActive="bg" md-list-item>
             <md-icon md-list-icon>home</md-icon>
@@ -45,6 +45,13 @@ export class AppComponent {
 
   constructor( private ngRedux: NgRedux<IAppState> ) {
 
+  }
+
+  logout(){
+    this.ngRedux.dispatch({
+      type: 'LOGOUT',
+      payload: { }
+    });
   }
 
   changeColor(color: string) {

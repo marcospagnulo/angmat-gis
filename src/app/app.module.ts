@@ -1,8 +1,11 @@
+import { AuthActions } from './actions/auth.actions';
+import { AuthorizedDirective } from './guard/authorized.directive';
+import { LoginComponent } from './views/login.component';
 import { AuthGuard } from './guard/auth.guard';
 import { DevicesActions } from './actions/devices.actions';
 import { AppRoutingModule } from './app.routing.module';
-import { ReduxComponent } from './views/redux/redux.component';
-import { HomeComponent } from './views/home/home.component';
+import { ReduxComponent } from './views/redux.component';
+import { HomeComponent } from './views/home.component';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './components/navbar.component';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -48,7 +51,7 @@ import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store'
 
 @NgModule({
   declarations: [
-    AppComponent, NavBarComponent, HomeComponent, ReduxComponent
+    AppComponent, NavBarComponent, HomeComponent, ReduxComponent, LoginComponent, AuthorizedDirective
   ],
   imports: [
     BrowserModule, HttpModule, FormsModule, NgReduxModule, AppRoutingModule,
@@ -59,7 +62,7 @@ import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store'
     MdToolbarModule, MdSidenavModule, MdInputModule, MdSelectModule, MdListModule,
     MdGridListModule
   ],
-  providers: [DevicesActions, AuthGuard],
+  providers: [DevicesActions, AuthActions, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,9 +1,9 @@
 import { style } from '@angular/animations';
 import { Component } from '@angular/core';
 import { select, NgRedux } from '@angular-redux/store';
-import { IAppState } from '../../store/index';
-import { Device } from '../../model/device';
-import { DevicesActions } from '../../actions/devices.actions';
+import { IAppState } from '../store/index';
+import { Device } from '../model/device';
+import { DevicesActions } from '../actions/devices.actions';
 
 @Component({
   selector: 'redux',
