@@ -17,6 +17,8 @@ export class AuthorizedDirective  {
       console.log(user);
       if (user != null) {
         this.view.createEmbeddedView(this.template);
+      } else {
+        this.view.detach();
       }
     });
   }

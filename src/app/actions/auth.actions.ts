@@ -30,4 +30,12 @@ export class AuthActions {
       payload: { username: username, password: password }
     });
   }
+
+  logout() {
+    this.router.navigateByUrl('/login');
+    this.ngRedux.dispatch({
+      type: 'LOGOUT',
+      payload: null
+    });
+  }
 }

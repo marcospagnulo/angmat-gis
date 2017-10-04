@@ -3,35 +3,35 @@
 }
 
 .text{
-  color:#DD000000;
+  color:rgba(0, 0, 0, 0.87) !important;
 }
 
 .text.display{
-  font-size: 34px;
+  font-size: 34px !important;
 }
 
 .text.headline{
-  font-size: 24px;
+  font-size: 24px !important;
 }
 
 .text.title{
-  font-size: 20px;
+  font-size: 20px !important;
 }
 
 .text.subhead{
-  font-size: 16px;
+  font-size: 16px !important;
 }
 
 .text.body{
-  font-size: 14px;
+  font-size: 14px !important;
 }
 
 .text.caption{
-  font-size: 12px;
+  font-size: 12px !important;
 }
 
 md-sidenav{
-  width:300px;
+  width:200px;
   transition: 0.2s all;
 }
 
@@ -39,6 +39,9 @@ md-card {
   display: inline-block;
 }
 
+md-sidenav, md-sidenav-container{
+  background: #F1F1F1 !important;
+}
 html, body, material-app, md-sidenav-container, .app-content {
   margin: 0;
   width: 100%;

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { AuthActions } from './actions/auth.actions';
+import { Component, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import 'hammerjs';
 import { select, NgRedux } from '@angular-redux/store';
 import { IAppState } from './store/index';
@@ -19,15 +21,20 @@ import { IAppState } from './store/index';
 
       <!-- Sidenav -->
       <md-sidenav #sidenav mode="side" opened="true" *authorized>
-        <md-list>
-          <a routerLink="/home" routerLinkActive="bg" md-list-item>
+        <md-list class="small-padding">
+          <button md-button (click)="goToPage('/home')" md-list-item>
             <md-icon md-list-icon>home</md-icon>
-            <h4 md-line>Home</h4>
-          </a>
-          <a routerLink="/redux" routerLinkActive="bg" md-list-item>
+            <span class="text subhead" md-line>Home</span>
+          </button>
+          <button md-button (click)="goToPage('/redux')" md-list-item>
             <md-icon md-list-icon>build</md-icon>
-            <h4 md-line>Redux</h4>
-          </a>
+            <span class="text subhead" md-line>Redux</span>
+          </button>
+          <md-divider></md-divider>
+          <button md-button (click)='logout()' md-list-item>
+            <md-icon md-list-icon>input</md-icon>
+            <span class="text subhead" md-line>Logout</span>
+          </button>
         </md-list>
       </md-sidenav>
 
@@ -41,17 +48,24 @@ import { IAppState } from './store/index';
 
 export class AppComponent {
 
+  @ViewChild('sidenav') sidenav;
+
   @select('config') config;   // use angular-redux select decorator
 
-  constructor( private ngRedux: NgRedux<IAppState> ) {
+  constructor( private ngRedux: NgRedux<IAppState>, public actions: AuthActions, private router: Router, private route: ActivatedRoute ) {
 
   }
 
-  logout(){
-    this.ngRedux.dispatch({
-      type: 'LOGOUT',
-      payload: { }
-    });
+  goToPage(page) {
+    this.router.navigateByUrl(page);
+  }
+
+  logout() {
+    this.actions.logout();
+  }
+
+  toggleSideNav() {
+    this.sidenav.toggle();
   }
 
   changeColor(color: string) {
