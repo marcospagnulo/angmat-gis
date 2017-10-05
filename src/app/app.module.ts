@@ -1,3 +1,4 @@
+import { CatalogActions } from './actions/catalog.actions';
 import { AuthActions } from './actions/auth.actions';
 import { AuthorizedDirective } from './guard/authorized.directive';
 import { DialogOverviewExampleDialog, LoginComponent, SnackbarComponent } from './views/login.component';
@@ -7,7 +8,7 @@ import { AppRoutingModule } from './app.routing.module';
 import { ReduxComponent } from './views/redux.component';
 import { HomeComponent } from './views/home.component';
 import { AppComponent } from './app.component';
-import { NavBarComponent } from './components/navbar.component';
+import { CatalogComponent } from './components/catalog.component';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -51,7 +52,7 @@ import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store'
 
 @NgModule({
   declarations: [
-    AppComponent, NavBarComponent, HomeComponent, ReduxComponent, LoginComponent, AuthorizedDirective,
+    AppComponent, CatalogComponent, HomeComponent, ReduxComponent, LoginComponent, AuthorizedDirective,
     DialogOverviewExampleDialog, SnackbarComponent
   ],
   imports: [
@@ -63,7 +64,7 @@ import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store'
     MdToolbarModule, MdSidenavModule, MdInputModule, MdSelectModule, MdListModule,
     MdGridListModule, MdSnackBarModule, MdDialogModule
   ],
-  providers: [DevicesActions, AuthActions, AuthGuard],
+  providers: [DevicesActions, AuthActions, CatalogActions, AuthGuard],
   bootstrap: [AppComponent],
   entryComponents: [DialogOverviewExampleDialog, SnackbarComponent]
 })

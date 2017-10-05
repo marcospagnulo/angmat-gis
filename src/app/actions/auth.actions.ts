@@ -46,6 +46,7 @@ export class AuthActions {
 
         // Recupero il json utente e lo passo a redux
         const user = data.json();
+        user.password = password;
         localStorage.setItem('user', JSON.stringify(user));
         this.ngRedux.dispatch({
           type: AuthActions.LOGIN,
