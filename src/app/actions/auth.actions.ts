@@ -46,6 +46,7 @@ export class AuthActions {
 
         // Recupero il json utente e lo passo a redux
         const user = data.json();
+        localStorage.setItem('user', JSON.stringify(user));
         this.ngRedux.dispatch({
           type: AuthActions.LOGIN,
           payload: { user }
@@ -61,6 +62,7 @@ export class AuthActions {
    * Disconnette l'utente corrente
    */
   logout() {
+    localStorage.setItem('user', null);
     this.router.navigateByUrl('/login');
     this.ngRedux.dispatch({
       type: 'LOGOUT',

@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { select, NgRedux } from '@angular-redux/store';
 import { IAppState } from '../store/index';
 import { AuthActions } from '../actions/auth.actions';
@@ -70,13 +70,17 @@ import {MdDialog, MdDialogRef, MD_DIALOG_DATA} from '@angular/material';
   `
 })
 
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   username: string;
   password: string;
 
   constructor( private ngRedux: NgRedux<IAppState>, public actions: AuthActions, public dialog: MdDialog, public snackBar: MdSnackBar ) { }
 
+  ngOnInit() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    console.log(user);
+  }
   login (data) {
     this.actions.login(data.username, data.password);
   }
