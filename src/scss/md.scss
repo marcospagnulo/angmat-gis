@@ -36,9 +36,22 @@ html, body, material-app, md-sidenav-container, .app-content {
   font-size: 12px !important;
 }
 
+snack-bar-container, md-sidenav{
+  transition: 0.2s all;
+}
+
+md-toolbar{
+  position: absolute;
+  z-index: 999;
+  top: 0;
+}
+
+md-sidenav-container, md-sidenav{
+  padding-top: 64px;
+}
+
 md-sidenav{
   width:200px;
-  transition: 0.2s all;
   margin: 8px;
 }
 

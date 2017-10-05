@@ -10,7 +10,7 @@ import { IAppState } from './store/index';
   template:
   `
     <!-- Toolbar -->
-    <md-toolbar color="primary" class="large-padding" *authorized>
+    <md-toolbar color="primary" class="mat-elevation-z6 large-padding" *authorized>
       <button md-icon-button (click)="sidenav.toggle()">
         <md-icon>menu</md-icon>
       </button>

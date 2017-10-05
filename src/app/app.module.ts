@@ -1,6 +1,6 @@
 import { AuthActions } from './actions/auth.actions';
 import { AuthorizedDirective } from './guard/authorized.directive';
-import { LoginComponent } from './views/login.component';
+import { DialogOverviewExampleDialog, LoginComponent, SnackbarComponent } from './views/login.component';
 import { AuthGuard } from './guard/auth.guard';
 import { DevicesActions } from './actions/devices.actions';
 import { AppRoutingModule } from './app.routing.module';
@@ -51,7 +51,8 @@ import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store'
 
 @NgModule({
   declarations: [
-    AppComponent, NavBarComponent, HomeComponent, ReduxComponent, LoginComponent, AuthorizedDirective
+    AppComponent, NavBarComponent, HomeComponent, ReduxComponent, LoginComponent, AuthorizedDirective,
+    DialogOverviewExampleDialog, SnackbarComponent
   ],
   imports: [
     BrowserModule, HttpModule, FormsModule, NgReduxModule, AppRoutingModule,
@@ -60,10 +61,11 @@ import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store'
     // material compoment
     MdButtonModule, MdCardModule, MdIconModule, MdRadioModule, MdSliderModule, MdMenuModule,
     MdToolbarModule, MdSidenavModule, MdInputModule, MdSelectModule, MdListModule,
-    MdGridListModule
+    MdGridListModule, MdSnackBarModule, MdDialogModule
   ],
   providers: [DevicesActions, AuthActions, AuthGuard],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DialogOverviewExampleDialog, SnackbarComponent]
 })
 export class AppModule {
 
