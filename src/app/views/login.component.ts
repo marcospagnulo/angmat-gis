@@ -28,7 +28,7 @@ import { AuthActions } from '../actions/auth.actions';
 
         <!-- Device price -->
         <md-form-field class="example-full-width">
-          <input mdInput type="number"
+          <input mdInput type="password"
             placeholder="Type a password"
             [ngModel]="password"
             name="password"

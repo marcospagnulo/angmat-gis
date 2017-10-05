@@ -1,3 +1,9 @@
+html, body, material-app, md-sidenav-container, .app-content {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
 .mat-list-icon {
   color: rgba(0, 0, 0, 0.54);
 }
@@ -33,6 +39,7 @@
 md-sidenav{
   width:200px;
   transition: 0.2s all;
+  margin: 8px;
 }
 
 md-card {
@@ -42,12 +49,19 @@ md-card {
 md-sidenav, md-sidenav-container{
   background: #F1F1F1 !important;
 }
-html, body, material-app, md-sidenav-container, .app-content {
-  margin: 0;
+
+md-sidenav button{
   width: 100%;
-  height: 100%;
+  padding: 8px 0 !important;
 }
 
-md-sidenav a.mat-list-item{
-  text-decoration: none !important;
+md-sidenav button .mat-button-wrapper{
+  width: 100%;
+  display: block;
+  text-align: left;
+}
+
+md-sidenav button md-icon{
+  margin-right: 16px;
+  margin-left: 8px;
 }

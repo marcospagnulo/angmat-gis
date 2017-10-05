@@ -56,14 +56,26 @@ export class AppComponent {
 
   }
 
+  /**
+   * Funzione esegue il routing verso la pagina in ingresso
+   *
+   * @param page
+   */
   goToPage(page) {
     this.router.navigateByUrl(page);
   }
 
+  /**
+   *
+   */
   logout() {
-    this.actions.logout();
+    this.sidenav.toggle();
+    setTimeout( () => this.actions.logout(), 200);
   }
 
+  /**
+   * Apre/chiude la sidenva
+   */
   toggleSideNav() {
     this.sidenav.toggle();
   }
