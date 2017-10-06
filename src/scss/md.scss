@@ -40,12 +40,19 @@ snack-bar-container, md-sidenav{
   transition: 0.2s all;
 }
 
+// Toolbar
 md-toolbar{
   position: absolute;
   z-index: 999;
   top: 0;
 }
 
+// Card
+md-card {
+  display: inline-block;
+}
+
+// Sidenav
 md-sidenav-container, md-sidenav{
   padding-top: 64px;
 }
@@ -55,9 +62,6 @@ md-sidenav{
   margin: 8px;
 }
 
-md-card {
-  display: inline-block;
-}
 
 md-sidenav, md-sidenav-container{
   background: #F1F1F1 !important;
@@ -77,4 +81,19 @@ md-sidenav button .mat-button-wrapper{
 md-sidenav button md-icon{
   margin-right: 16px;
   margin-left: 8px;
+}
+
+// Button
+.mat-button-wrapper{
+  display: flex;
+}
+button md-spinner {
+  width: 20px !important;
+  height: 22px !important;
+  margin-top: 5px;
+  margin-left: 16px;
+}
+
+button .label-button{
+
 }

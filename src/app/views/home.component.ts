@@ -1,3 +1,4 @@
+import { Auth } from '../store/auth.reducer';
 import { Component } from '@angular/core';
 import { select, NgRedux } from '@angular-redux/store';
 import { IAppState } from '../store/index';
@@ -7,23 +8,20 @@ import { User } from '../model/user';
   selector: 'home',
   template: `
     <div>Home</div>
-    <pre>{{(user | async | json)}}</pre>
+    <pre>{{user | json}}</pre>
     <catalog></catalog>
   `
 })
 
 export class HomeComponent {
 
-  @select('user') user;
-
-  u: User;
+  user: User;
 
   constructor( private ngRedux: NgRedux<IAppState>) {
 
-    this.ngRedux.select(['user',])
-    .subscribe((u: User) => {
-      console.log('user', u);
-      this.u = u;
+    this.ngRedux.select(['auth']).subscribe((auth: Auth) => {
+      console.log('user', auth.user);
+      this.user = auth.user;
     });
   }
 }

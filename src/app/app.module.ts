@@ -62,7 +62,7 @@ import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store'
     // material compoment
     MdButtonModule, MdCardModule, MdIconModule, MdRadioModule, MdSliderModule, MdMenuModule,
     MdToolbarModule, MdSidenavModule, MdInputModule, MdSelectModule, MdListModule,
-    MdGridListModule, MdSnackBarModule, MdDialogModule
+    MdGridListModule, MdSnackBarModule, MdDialogModule, MdProgressSpinnerModule
   ],
   providers: [DevicesActions, AuthActions, CatalogActions, AuthGuard],
   bootstrap: [AppComponent],

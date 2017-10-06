@@ -1,3 +1,4 @@
+import { Auth } from '../store/auth.reducer';
 import { Component, Inject, OnInit } from '@angular/core';
 import { select, NgRedux } from '@angular-redux/store';
 import { IAppState } from '../store/index';
@@ -20,7 +21,7 @@ import {MdDialog, MdDialogRef, MD_DIALOG_DATA} from '@angular/material';
 
           <form #f="ngForm" (ngSubmit)="login(f.value)">
 
-            <!-- Username -->
+            <!-- Username field -->
             <md-form-field class="example-full-width">
               <input mdInput type="text"
                 placeholder="Type a name"
@@ -36,7 +37,7 @@ import {MdDialog, MdDialogRef, MD_DIALOG_DATA} from '@angular/material';
 
             <div class="small-padding"></div>
 
-            <!-- Device price -->
+            <!-- Password field -->
             <md-form-field class="example-full-width">
               <input mdInput type="password"
                 placeholder="Type a password"
@@ -51,11 +52,13 @@ import {MdDialog, MdDialogRef, MD_DIALOG_DATA} from '@angular/material';
 
             <div class="small-padding"></div>
 
+            <!-- Login button -->
             <button md-raised-button
                     color="primary"
                     type="submit"
-                    [disabled]="f.invalid">
-              LOGIN
+                    [disabled]="f.invalid || loginInProgress">
+              <span class="label-button">LOGIN</span>
+              <md-spinner *ngIf="loginInProgress" color="warn"></md-spinner>
             </button>
           </form>
 
@@ -73,16 +76,27 @@ import {MdDialog, MdDialogRef, MD_DIALOG_DATA} from '@angular/material';
 export class LoginComponent implements OnInit {
 
   username: string;
+
   password: string;
+
+  loginInProgress: boolean;
+
+  @select('auth') auth;
 
   constructor( private ngRedux: NgRedux<IAppState>, public actions: AuthActions, public dialog: MdDialog, public snackBar: MdSnackBar ) { }
 
   ngOnInit() {
-    const user = JSON.parse(localStorage.getItem('user'));
-    console.log(user);
+    const that = this;
+    this.ngRedux.select(['auth']).subscribe((auth: Auth) => {
+      setTimeout(function(){
+        that.loginInProgress = false;
+      }, 1000);
+    });
   }
+
   login (data) {
-    this.actions.login(data.username, data.password);
+    this.loginInProgress = true;
+    const login = this.actions.login(data.username, data.password);
   }
 
   openSnackBar() {

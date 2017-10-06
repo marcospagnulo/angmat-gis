@@ -12,8 +12,6 @@ import { Config } from '../config';
 @Injectable()
 export class AuthActions {
 
-  static LOGIN = 'LOGIN';
-
   returnUrl: string;
 
   constructor( private ngRedux: NgRedux<IAppState>, private http: Http, private router: Router, private route: ActivatedRoute) {
@@ -44,17 +42,22 @@ export class AuthActions {
         const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
         this.router.navigateByUrl(returnUrl);
 
-        // Recupero il json utente e lo passo a redux
+        // Recupero il json utente
         const user = data.json();
         user.password = password;
         localStorage.setItem('user', JSON.stringify(user));
+
+        // Login event dispatch
         this.ngRedux.dispatch({
-          type: AuthActions.LOGIN,
+          type: 'LOGIN',
           payload: { user }
         });
       },
       (err) => {
-
+        this.ngRedux.dispatch({
+          type: 'LOGIN_ERROR',
+          payload: true
+        });
       }
     );
   }

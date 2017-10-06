@@ -1,10 +1,10 @@
 export class Config {
 
   // Header for authentication
-  public static COMPANY_ID = '1';
+  public static COMPANY_ID = '10154';
 
   // Api endpoint
-  public static API_HOST = 'http://localhost:8080';
+  public static API_HOST = 'http://web14.linksmt.it';
   public static API_SERVICE = 'dss-ws-portlet/services';
 
   // Service endpoint
