@@ -1,0 +1,43 @@
+#catalog-container{
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 400px;
+  max-height: 90%;
+  z-index: 999;
+  overflow: auto;
+  padding: 0px;
+}
+
+catalog .mat-spinner-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+catalog mat-spinner{
+  margin: 0 auto;
+}
+
+catalog mat-spinner, catalog mat-spinner svg {
+  width: 50px !important;
+  height: 50px !important;
+}
+
+branch {
+  display: block;
+}
+
+catalog mat-list{
+  padding: 0;
+}
+
+catalog mat-checkbox .mat-checkbox-inner-container{
+  width: 20px;
+  height: 20px;
+  margin-left: 7px;
+}
+
+branch mat-list{
+  padding-left: 16px;
+  padding-top: 0px !important;
+}

@@ -10,7 +10,6 @@ import { HomeComponent } from './views/home.component';
 import { AppComponent } from './app.component';
 import { CatalogComponent } from './components/catalog/catalog.component';
 import { BranchComponent } from './components/catalog/branch.component';
-import { LeafComponent } from './components/catalog/leaf.component';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -56,7 +55,7 @@ import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store'
   declarations: [
     AppComponent, HomeComponent, ReduxComponent, LoginComponent, AuthorizedDirective,
     DialogOverviewExampleDialog, SnackbarComponent,
-    CatalogComponent, BranchComponent, LeafComponent
+    CatalogComponent, BranchComponent
   ],
   imports: [
     BrowserModule, HttpModule, FormsModule, NgReduxModule, AppRoutingModule,
@@ -65,7 +64,8 @@ import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store'
     // material compoment
     MatButtonModule, MatCardModule, MatIconModule, MatRadioModule, MatSliderModule, MatMenuModule,
     MatToolbarModule, MatSidenavModule, MatInputModule, MatSelectModule, MatListModule,
-    MatGridListModule, MatSnackBarModule, MatDialogModule, MatProgressSpinnerModule
+    MatGridListModule, MatSnackBarModule, MatDialogModule, MatProgressSpinnerModule,
+    MatCheckboxModule
   ],
   providers: [DevicesActions, AuthActions, CatalogActions, AuthGuard],
   bootstrap: [AppComponent],

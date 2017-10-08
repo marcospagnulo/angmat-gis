@@ -20,7 +20,7 @@ import { IAppState } from './store/index';
     <mat-sidenav-container>
 
       <!-- Sidenav -->
-      <mat-sidenav #sidenav mode="side" opened="true" *authorized>
+      <mat-sidenav #sidenav mode="side" opened="false" *authorized>
         <mat-list class="small-padding">
           <button mat-button (click)="goToPage('/home')" mat-list-item>
             <mat-icon mat-list-icon>home</mat-icon>

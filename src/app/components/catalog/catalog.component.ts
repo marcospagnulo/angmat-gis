@@ -6,17 +6,13 @@ import { CatalogActions } from '../../actions/catalog.actions';
 @Component({
   selector: 'catalog',
   template: `
-    <div>
-      <span class="subhead">Catalogo dei dati</span>
-    </div>
-    <div>
-      <branch *ngFor="let node of (catalog | async).catalogNodes" [node]='node'>
-
-      </branch>
-      <!--
-      <pre>{{ ((catalog | async)) | json }}</pre>
-      -->
-    </div>
+    <mat-list>
+      <span mat-subheader class="text subhead">Catalogo dei dati</span>
+      <branch mat-list-item *ngFor="let node of (catalog | async).catalogNodes" [node]='node'></branch>
+      <div *ngIf="(catalog | async).catalogNodes === null" class="mat-spinner-container large-padding">
+        <mat-spinner></mat-spinner>
+      </div>
+    </mat-list>
 `
 })
 
@@ -24,14 +20,9 @@ export class CatalogComponent implements OnInit {
 
   @select('catalog') catalog;
 
-  catalogNodes = [];
-
   constructor( private ngRedux: NgRedux<IAppState>, public actions: CatalogActions ) { }
 
   ngOnInit() {
     this.actions.loadCatalog();
-    this.ngRedux.select(['catalog']).subscribe((catalog: any) => {
-      console.log('catalogNodes', catalog.catalogNodes);
-    });
   }
 }

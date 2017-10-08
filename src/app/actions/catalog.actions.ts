@@ -8,16 +8,14 @@ import { Device } from '../model/device';
 import { Config } from '../config';
 
 /**
- * Espone servizi di autenticazione
+ * Classe action per funzionalità di catalogo
  */
 @Injectable()
 export class CatalogActions {
 
   returnUrl: string;
 
-  constructor( private ngRedux: NgRedux<IAppState>, private http: Http, private router: Router, private route: ActivatedRoute) {
-
-  }
+  constructor( private ngRedux: NgRedux<IAppState>, private http: Http, private router: Router, private route: ActivatedRoute) { }
 
   /**
    * Carica il catalogo dei dati
@@ -31,7 +29,6 @@ export class CatalogActions {
     myHeaders.append('password', user.password);
 
     const options = new RequestOptions({ headers: myHeaders });
-
     this.http.get(
       `${Config.API_HOST}/${Config.API_SERVICE}/${Config.API_CATALOG}`,
       options
@@ -49,5 +46,18 @@ export class CatalogActions {
 
       }
     );
+  }
+
+  /**
+   * Toggle di selezione su un nodo di catalogo
+   *
+   * @param node - nodo di catalogo
+   * @param selected - indica se il nodo è stato selezionato o deselzionato
+   */
+  selectLeaf(node, selected) {
+    this.ngRedux.dispatch({
+      type: selected ? 'REMOVE_SELECT_NODE' : 'ADD_SELECT_NODE',
+      payload: { node }
+    });
   }
 }
