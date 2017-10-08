@@ -29,6 +29,7 @@ export class CatalogActions {
     myHeaders.append('password', user.password);
 
     const options = new RequestOptions({ headers: myHeaders });
+
     this.http.get(
       `${Config.API_HOST}/${Config.API_SERVICE}/${Config.API_CATALOG}`,
       options
@@ -40,6 +41,32 @@ export class CatalogActions {
         this.ngRedux.dispatch({
           type: 'LOAD_CATALOG',
           payload: { catalog }
+        });
+      },
+      (err) => {
+
+      }
+    );
+  }
+
+  loadTimebar(nodes) {
+
+    const user = JSON.parse(localStorage.getItem('user'));
+    const myHeaders = new Headers();
+    myHeaders.append('userId', user.id);
+    myHeaders.append('companyId', Config.COMPANY_ID);
+    myHeaders.append('password', user.password);
+
+    const options = new RequestOptions({ headers: myHeaders });
+
+    let url = `${Config.API_HOST}/${Config.API_SERVICE}/${Config.API_CATALOG_TIMESLICES}`;
+    url = url + nodes.join(',');
+    this.http.get(url, options).subscribe(
+      (response) => {
+        const timebar = response.json().data;
+        this.ngRedux.dispatch({
+          type: 'LOAD_TIMEBAR',
+          payload: { timebar }
         });
       },
       (err) => {

@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { select, NgRedux } from '@angular-redux/store';
 import { IAppState } from '../store/index';
 import { User } from '../model/user';
+import { CatalogActions } from '../actions/catalog.actions';
 import * as L from 'leaflet';
 
 @Component({
@@ -22,7 +23,7 @@ export class HomeComponent implements OnInit {
 
   map: L.Map;
 
-  constructor( private ngRedux: NgRedux<IAppState>) {
+  constructor(private ngRedux: NgRedux<IAppState>, public actions: CatalogActions ) {
 
     this.ngRedux.select(['auth']).subscribe((auth: Auth) => {
       this.user = auth.user;
@@ -51,12 +52,22 @@ export class HomeComponent implements OnInit {
    */
   drawSelectedLayer(catalog) {
 
-    console.log('drawSelectedLayer - catalog state', catalog);
+    // Recupero gli item di catalogo dai nodi selezionati
+    const items = [];
     catalog.selectedNodes.map(node => {
-
       const itemIds = node.itemIds;
-      const items = catalog.catalogItems.filter(({ id }) => id === itemIds[0]);
-      console.log('drawSelectedLayer - items', items);
+      for (const itemId of itemIds) {
+        for (const item of catalog.catalogItems) {
+          if (itemId === item.id) {
+            items.push(item);
+          }
+        }
+      }
     });
+
+    // Scarico la barra del tempo
+    if (catalog.selectedNodes.length > 0) {
+      this.actions.loadTimebar(catalog.selectedNodes.map((n) => n.id));
+    }
   }
 }
