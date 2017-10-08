@@ -10,39 +10,39 @@ import { IAppState } from './store/index';
   template:
   `
     <!-- Toolbar -->
-    <md-toolbar color="primary" class="mat-elevation-z6 large-padding" *authorized>
-      <button md-icon-button (click)="sidenav.toggle()">
-        <md-icon>menu</md-icon>
+    <mat-toolbar color="primary" class="mat-elevation-z6 large-padding" *authorized>
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
       </button>
       <h2>Demo Application</h2>
-    </md-toolbar>
+    </mat-toolbar>
 
-    <md-sidenav-container>
+    <mat-sidenav-container>
 
       <!-- Sidenav -->
-      <md-sidenav #sidenav mode="side" opened="true" *authorized>
-        <md-list class="small-padding">
-          <button md-button (click)="goToPage('/home')" md-list-item>
-            <md-icon md-list-icon>home</md-icon>
-            <span class="text subhead" md-line>Home</span>
+      <mat-sidenav #sidenav mode="side" opened="true" *authorized>
+        <mat-list class="small-padding">
+          <button mat-button (click)="goToPage('/home')" mat-list-item>
+            <mat-icon mat-list-icon>home</mat-icon>
+            <span class="text subhead" mat-line>Home</span>
           </button>
-          <button md-button (click)="goToPage('/redux')" md-list-item>
-            <md-icon md-list-icon>build</md-icon>
-            <span class="text subhead" md-line>Redux</span>
+          <button mat-button (click)="goToPage('/redux')" mat-list-item>
+            <mat-icon mat-list-icon>build</mat-icon>
+            <span class="text subhead" mat-line>Redux</span>
           </button>
-          <md-divider></md-divider>
-          <button md-button (click)='logout()' md-list-item>
-            <md-icon md-list-icon>input</md-icon>
-            <span class="text subhead" md-line>Logout</span>
+          <mat-divider></mat-divider>
+          <button mat-button (click)='logout()' mat-list-item>
+            <mat-icon mat-list-icon>input</mat-icon>
+            <span class="text subhead" mat-line>Logout</span>
           </button>
-        </md-list>
-      </md-sidenav>
+        </mat-list>
+      </mat-sidenav>
 
       <!-- Main content-->
-      <div class="app-content large-padding">
+      <div class="app-content">
         <router-outlet></router-outlet>
     </div>
-  </md-sidenav-container>
+  </mat-sidenav-container>
   `
 })
 

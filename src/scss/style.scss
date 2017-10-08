@@ -6,14 +6,15 @@
   padding: 16px;
 }
 
-navbar, #navbar-content{
-  width: 100%;
-}
-
-.app-content {
-  min-height: 500px;
-}
-
 #map {
   height: 100%;
+}
+
+#catalog-container{
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 300px;
+  max-height: 400px;
+  z-index: 999;
 }

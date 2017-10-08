@@ -8,90 +8,90 @@ import { DevicesActions } from '../actions/devices.actions';
 @Component({
   selector: 'redux',
   template: `
+  <div class="large-padding">
+    <mat-card>
+      <h3>{{(config | async).color}}</h3>
+      <button mat-raised-button (click)="changeColor('green')">Change Color</button>
+    </mat-card>
 
+    <div class="small-padding"></div>
 
-  <md-card>
-    <h3>{{(config | async).color}}</h3>
-    <button md-raised-button (click)="changeColor('green')">Change Color</button>
-  </md-card>
+    <mat-card>
 
-  <div class="small-padding"></div>
+      <form #f="ngForm" (ngSubmit)="actions.save(f.value, device.id)">
 
-  <md-card>
+        <!-- Device name -->
+        <mat-form-field class="example-full-width">
+          <input matInput type="text"
+            placeholder="Type a name"
+            [ngModel]="device?.label"
+            name="label"
+            #labelRef="ngModel"
+            minlength="4"
+            required />
+          <mat-error *ngIf="labelRef.errors && labelRef.dirty">
+            Device name is incorrect
+          </mat-error>
+          <mat-error *ngIf="labelRef.hasError('required')">
+            Device name is mandatory
+          </mat-error>
+        </mat-form-field>
 
-    <form #f="ngForm" (ngSubmit)="actions.save(f.value, device.id)">
+        <div class="small-padding"></div>
 
-      <!-- Device name -->
-      <md-form-field class="example-full-width">
-        <input mdInput type="text"
-          placeholder="Type a name"
-          [ngModel]="device?.label"
-          name="label"
-          #labelRef="ngModel"
-          minlength="4"
-          required />
-        <md-error *ngIf="labelRef.errors && labelRef.dirty">
-          Device name is incorrect
-        </md-error>
-        <md-error *ngIf="labelRef.hasError('required')">
-          Device name is mandatory
-        </md-error>
-      </md-form-field>
+        <!-- Device price -->
+        <mat-form-field class="example-full-width">
+          <input matInput type="number"
+            placeholder="Type a price"
+            [ngModel]="device?.price"
+            name="price"
+            #priceRef="ngModel"
+            required />
+          <mat-error *ngIf="priceRef.hasError('required')">
+            Price is mandatory
+          </mat-error>
+        </mat-form-field>
 
-      <div class="small-padding"></div>
+        <div class="small-padding"></div>
 
-      <!-- Device price -->
-      <md-form-field class="example-full-width">
-        <input mdInput type="number"
-          placeholder="Type a price"
-          [ngModel]="device?.price"
-          name="price"
-          #priceRef="ngModel"
-          required />
-        <md-error *ngIf="priceRef.hasError('required')">
-          Price is mandatory
-        </md-error>
-      </md-form-field>
+        <button mat-raised-button
+                color="primary"
+                type="submit"
+                [disabled]="f.invalid">
+          {{device?.id ? 'SAVE' : 'ADD'}}
+        </button>
+        <button mat-raised-button
+                type="button"
+                (click)="actions.reset()">
+          RESET
+        </button>
+      </form>
+    </mat-card>
 
-      <div class="small-padding"></div>
+    <div class="small-padding"></div>
 
-      <button md-raised-button
-              color="primary"
-              type="submit"
-              [disabled]="f.invalid">
-        {{device?.id ? 'SAVE' : 'ADD'}}
-      </button>
-      <button md-raised-button
-              type="button"
-              (click)="actions.reset()">
-        RESET
-      </button>
-    </form>
-  </md-card>
-
-  <div class="small-padding"></div>
-
-  <md-card>
-    <md-list>
-      <h3 md-subheader>Devices</h3>
-      <md-list-item [ngClass]="{'active': device?.id === d.id}"
-        *ngFor="let d of devices | async">
-          <div class="pull-left">
-            <span class="text subhead">{{d.label}}</span><br/>
-            <span class="text body">{{d.price}}$</span>
-          </div>
-          <div class="pull-right">
-            <button md-icon-button>
-              <md-icon (click)="actions.setActive(d.id)">edit</md-icon>
-            </button>
-            <button md-icon-button>
-              <md-icon (click)="actions.delete(d.id)">delete</md-icon>
-            </button>
-          </div>
-          <div style="clear: right"></div>
-      </md-list-item>
-    </md-list>
-  </md-card>
+    <mat-card>
+      <mat-list>
+        <h3 mat-subheader>Devices</h3>
+        <mat-list-item [ngClass]="{'active': device?.id === d.id}"
+          *ngFor="let d of devices | async">
+            <div class="pull-left">
+              <span class="text subhead">{{d.label}}</span><br/>
+              <span class="text body">{{d.price}}$</span>
+            </div>
+            <div class="pull-right">
+              <button mat-icon-button>
+                <mat-icon (click)="actions.setActive(d.id)">edit</mat-icon>
+              </button>
+              <button mat-icon-button>
+                <mat-icon (click)="actions.delete(d.id)">delete</mat-icon>
+              </button>
+            </div>
+            <div style="clear: right"></div>
+        </mat-list-item>
+      </mat-list>
+    </mat-card>
+  </div>
   `
 })
 

@@ -1,4 +1,4 @@
-html, body, material-app, md-sidenav-container, .app-content {
+html, body, material-app, mat-sidenav-container, .app-content {
   margin: 0;
   width: 100%;
   height: 100%;
@@ -36,62 +36,61 @@ html, body, material-app, md-sidenav-container, .app-content {
   font-size: 12px !important;
 }
 
-snack-bar-container, md-sidenav{
+snack-bar-container, mat-sidenav{
   transition: 0.2s all;
 }
 
 // Toolbar
-md-toolbar{
+mat-toolbar{
   position: absolute;
   z-index: 999;
   top: 0;
 }
 
 // Card
-md-card {
+mat-card {
   display: inline-block;
 }
 
 // Sidenav
-md-sidenav-container, md-sidenav{
+mat-sidenav-container{
   padding-top: 64px;
 }
 
-md-sidenav{
+mat-sidenav{
   width:200px;
-  margin: 8px;
+  padding: 72px 8px 8px 8px;
 }
 
 
-md-sidenav, md-sidenav-container{
+mat-sidenav, mat-sidenav-container{
   background: #F1F1F1 !important;
 }
 
-md-sidenav button{
+mat-sidenav button{
   width: 100%;
   padding: 8px 0 !important;
 }
 
-md-sidenav button .mat-button-wrapper{
+mat-sidenav button .mat-button-wrapper{
   width: 100%;
   display: block;
   text-align: left;
 }
 
-md-sidenav button md-icon{
+mat-sidenav button mat-icon{
   margin-right: 16px;
   margin-left: 8px;
 }
 
 // Button
-.mat-button-wrapper{
-  display: flex;
-}
-button md-spinner {
+button mat-spinner, button mat-spinner svg {
   width: 20px !important;
   height: 22px !important;
-  margin-top: 5px;
-  margin-left: 16px;
+}
+
+button mat-spinner {
+  margin: 8px 16px;
 }
 
 button .label-button{

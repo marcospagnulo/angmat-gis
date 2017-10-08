@@ -3,72 +3,72 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { select, NgRedux } from '@angular-redux/store';
 import { IAppState } from '../store/index';
 import { AuthActions } from '../actions/auth.actions';
-import { MdSnackBar } from '@angular/material';
-import {MdDialog, MdDialogRef, MD_DIALOG_DATA} from '@angular/material';
+import { MatSnackBar } from '@angular/material';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 
 
 @Component({
   selector: 'login',
   template: `
-    <md-grid-list cols="3" rowHeight="1:1">
+    <mat-grid-list cols="3" rowHeight="1:1">
 
-      <md-grid-tile></md-grid-tile>
+      <mat-grid-tile></mat-grid-tile>
 
-      <md-grid-tile>
+      <mat-grid-tile>
 
-        <md-card>
+        <mat-card>
 
           <form #f="ngForm" (ngSubmit)="login(f.value)">
 
             <!-- Username field -->
-            <md-form-field class="example-full-width">
-              <input mdInput type="text"
+            <mat-form-field class="example-full-width">
+              <input matInput type="text"
                 placeholder="Type a name"
                 [ngModel]="username"
                 name="username"
                 #labelRef="ngModel"
                 minlength="4"
                 required />
-              <md-error *ngIf="labelRef.hasError('required')">
+              <mat-error *ngIf="labelRef.hasError('required')">
                 Username is mandatory
-              </md-error>
-            </md-form-field>
+              </mat-error>
+            </mat-form-field>
 
             <div class="small-padding"></div>
 
             <!-- Password field -->
-            <md-form-field class="example-full-width">
-              <input mdInput type="password"
+            <mat-form-field class="example-full-width">
+              <input matInput type="password"
                 placeholder="Type a password"
                 [ngModel]="password"
                 name="password"
                 #priceRef="ngModel"
                 required />
-              <md-error *ngIf="priceRef.hasError('required')">
+              <mat-error *ngIf="priceRef.hasError('required')">
                 Password is mandatory
-              </md-error>
-            </md-form-field>
+              </mat-error>
+            </mat-form-field>
 
             <div class="small-padding"></div>
 
             <!-- Login button -->
-            <button md-raised-button
+            <button mat-raised-button
                     color="primary"
                     type="submit"
                     [disabled]="f.invalid || loginInProgress">
-              <span class="label-button">LOGIN</span>
-              <md-spinner *ngIf="loginInProgress" color="warn"></md-spinner>
+              <span *ngIf="!loginInProgress">LOGIN</span>
+              <mat-spinner *ngIf="loginInProgress" color="warn"></mat-spinner>
             </button>
           </form>
 
-        </md-card>
+        </mat-card>
 
-      </md-grid-tile>
+      </mat-grid-tile>
 
-      <md-grid-tile></md-grid-tile>
+      <mat-grid-tile></mat-grid-tile>
 
-    </md-grid-list>
+    </mat-grid-list>
 
   `
 })
@@ -83,7 +83,7 @@ export class LoginComponent implements OnInit {
 
   @select('auth') auth;
 
-  constructor( private ngRedux: NgRedux<IAppState>, public actions: AuthActions, public dialog: MdDialog, public snackBar: MdSnackBar ) { }
+  constructor( private ngRedux: NgRedux<IAppState>, public actions: AuthActions, public dialog: MatDialog, public snackBar: MatSnackBar ) { }
 
   ngOnInit() {
     const that = this;
@@ -127,8 +127,8 @@ export class LoginComponent implements OnInit {
 export class DialogOverviewExampleDialog {
 
   constructor(
-    public dialogRef: MdDialogRef<DialogOverviewExampleDialog>,
-    @Inject(MD_DIALOG_DATA) public data: any) { }
+    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   onNoClick(): void {
     this.dialogRef.close();

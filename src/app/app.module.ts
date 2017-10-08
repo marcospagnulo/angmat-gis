@@ -8,61 +8,64 @@ import { AppRoutingModule } from './app.routing.module';
 import { ReduxComponent } from './views/redux.component';
 import { HomeComponent } from './views/home.component';
 import { AppComponent } from './app.component';
-import { CatalogComponent } from './components/catalog.component';
+import { CatalogComponent } from './components/catalog/catalog.component';
+import { BranchComponent } from './components/catalog/branch.component';
+import { LeafComponent } from './components/catalog/leaf.component';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {
-  MdAutocompleteModule,
-  MdButtonModule,
-  MdButtonToggleModule,
-  MdCardModule,
-  MdCheckboxModule,
-  MdChipsModule,
-  MdDatepickerModule,
-  MdDialogModule,
-  MdExpansionModule,
-  MdGridListModule,
-  MdIconModule,
-  MdInputModule,
-  MdListModule,
-  MdMenuModule,
-  MdNativeDateModule,
-  MdPaginatorModule,
-  MdProgressBarModule,
-  MdProgressSpinnerModule,
-  MdRadioModule,
-  MdRippleModule,
-  MdSelectModule,
-  MdSidenavModule,
-  MdSliderModule,
-  MdSlideToggleModule,
-  MdSnackBarModule,
-  MdSortModule,
-  MdTableModule,
-  MdTabsModule,
-  MdToolbarModule,
-  MdTooltipModule,
-  MdStepperModule,
+  MatAutocompleteModule,
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatPaginatorModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatSortModule,
+  MatTableModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatTooltipModule,
+  MatStepperModule,
 } from '@angular/material';
 import { IAppState, rootReducer } from './store/index';
 import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store';
 
 @NgModule({
   declarations: [
-    AppComponent, CatalogComponent, HomeComponent, ReduxComponent, LoginComponent, AuthorizedDirective,
-    DialogOverviewExampleDialog, SnackbarComponent
+    AppComponent, HomeComponent, ReduxComponent, LoginComponent, AuthorizedDirective,
+    DialogOverviewExampleDialog, SnackbarComponent,
+    CatalogComponent, BranchComponent, LeafComponent
   ],
   imports: [
     BrowserModule, HttpModule, FormsModule, NgReduxModule, AppRoutingModule,
     // material animations
     BrowserAnimationsModule, NoopAnimationsModule,
     // material compoment
-    MdButtonModule, MdCardModule, MdIconModule, MdRadioModule, MdSliderModule, MdMenuModule,
-    MdToolbarModule, MdSidenavModule, MdInputModule, MdSelectModule, MdListModule,
-    MdGridListModule, MdSnackBarModule, MdDialogModule, MdProgressSpinnerModule
+    MatButtonModule, MatCardModule, MatIconModule, MatRadioModule, MatSliderModule, MatMenuModule,
+    MatToolbarModule, MatSidenavModule, MatInputModule, MatSelectModule, MatListModule,
+    MatGridListModule, MatSnackBarModule, MatDialogModule, MatProgressSpinnerModule
   ],
   providers: [DevicesActions, AuthActions, CatalogActions, AuthGuard],
   bootstrap: [AppComponent],

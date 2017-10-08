@@ -24,9 +24,7 @@ export class CatalogActions {
    */
   loadCatalog() {
 
-    const catalog = JSON.parse(localStorage.getItem('catalog'));
     const user = JSON.parse(localStorage.getItem('user'));
-
     const myHeaders = new Headers();
     myHeaders.append('userId', user.id);
     myHeaders.append('companyId', Config.COMPANY_ID);
