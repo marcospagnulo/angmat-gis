@@ -104,4 +104,16 @@ export class CatalogActions {
       payload: { node }
     });
   }
+
+  /**
+   * Imposta l'orario selezionato
+   *
+   * @param t - orario selezionato
+   */
+  selectTimeslice(t) {
+    this.ngRedux.dispatch({
+      type: 'SELECT_TIMESLICE',
+      payload: t
+    });
+  }
 }

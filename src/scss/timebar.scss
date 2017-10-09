@@ -24,3 +24,13 @@ timebar mat-spinner, timebar mat-spinner svg {
   width: 50px !important;
   height: 50px !important;
 }
+
+timebar .timebar-days .mat-tab-label{
+  min-width: 80px !important;
+  padding: 0 12px !important;
+}
+
+timebar .timebar-hours .mat-tab-label{
+  min-width: 40px !important;
+  padding: 0 8px !important;
+}

@@ -15,15 +15,21 @@ import { Timebar } from '../../store/timebar.reducer';
       </div>
 
       <!-- Days -->
-      <mat-tab-group>
+      <mat-tab-group *ngIf="!(timebar | async).timebarLoading" class="timebar-days">
         <mat-tab *ngFor="let d of days">
           <ng-template mat-tab-label>
-            <span class="text body">{{d}}</span>
+            <span class="text subhead">{{d}}</span>
           </ng-template>
-          <div>{{timePerDay[d]}}</div>
+          <!-- Hours per day-->
+          <mat-tab-group class="timebar-hours">
+            <mat-tab *ngFor="let h of timePerDay[d]">
+              <ng-template mat-tab-label>
+                <span (click)="selectTimeslice(h)" class="text body">{{h}}</span>
+              </ng-template>
+            </mat-tab>
+          </mat-tab-group>
         </mat-tab>
       </mat-tab-group>
-      <!-- Timelice per day -->
 
     </mat-card>
 `
@@ -33,6 +39,10 @@ export class TimebarComponent {
 
   @select('timebar') timebar;
 
+  @select(['timebar', 'timeslices']) timeslices;
+
+  @select(['timebar', 'selectedTimeslice']) selectedTimeslice ;
+
   showTimebar: boolean;
 
   days: string[];
@@ -41,13 +51,19 @@ export class TimebarComponent {
 
   constructor( private ngRedux: NgRedux<IAppState>, public actions: CatalogActions) {
 
-    // Costruisco la barra del tempo in funzione dei timeslice caricati
-    this.ngRedux.select(['timebar']).subscribe((timebar: Timebar) => {
+    this.selectedTimeslice.subscribe((selectedTimeslice: number) => {
+      console.log('selectedTimeslice', selectedTimeslice);
+    });
 
-      if (timebar.timeslices) {
+    // Costruisco la barra del tempo in funzione dei timeslice caricati
+    this.timeslices.subscribe((timeslices: Array<any>) => {
+
+      console.log('timeslices', timeslices);
+
+      if (timeslices) {
 
         // Itero i timeslice e costruisco una mappa con chiave il giorno di appartenenza il timeslice iterato
-        for (const t of timebar.timeslices){
+        for (const t of timeslices){
 
           // la chiave della mappa è in MM/dd/yyyy
           const tdate = new Date(t.ts);
@@ -55,7 +71,7 @@ export class TimebarComponent {
           keyDate.setDate(tdate.getDate());
           keyDate.setMonth(tdate.getMonth());
           keyDate.setFullYear(tdate.getFullYear());
-          const key = this.formatDateDDMM(keyDate.getTime());
+          const key = this.formatDateDDMM(keyDate);
 
           if (this.timePerDay[key]) {
             this.timePerDay[key].push(this.formatDateHHmm(tdate));
@@ -71,7 +87,10 @@ export class TimebarComponent {
     });
   }
 
-    /**
+  selectTimeslice(h) {
+    this.actions.selectTimeslice(h);
+  }
+  /**
    * Formatta una data nel formato dd/MM
    */
   formatDateDDMM(tdate) {
