@@ -49,6 +49,11 @@ export class CatalogActions {
     );
   }
 
+  /**
+   * Scarica la barra del tempo in base ai nodi di catalogo selezionati
+   *
+   * @param nodes - nodi di catalogo selezionati
+   */
   loadTimebar(nodes) {
 
     const user = JSON.parse(localStorage.getItem('user'));
@@ -59,20 +64,32 @@ export class CatalogActions {
 
     const options = new RequestOptions({ headers: myHeaders });
 
-    let url = `${Config.API_HOST}/${Config.API_SERVICE}/${Config.API_CATALOG_TIMESLICES}`;
-    url = url + nodes.join(',');
-    this.http.get(url, options).subscribe(
-      (response) => {
-        const timebar = response.json().data;
-        this.ngRedux.dispatch({
-          type: 'LOAD_TIMEBAR',
-          payload: { timebar }
-        });
-      },
-      (err) => {
 
-      }
-    );
+    if (nodes && nodes.length > 0) {
+
+      this.ngRedux.dispatch({
+        type: 'LOADING_TIMEBAR',
+        payload: true
+      });
+
+      let url = `${Config.API_HOST}/${Config.API_SERVICE}/${Config.API_CATALOG_TIMESLICES}`;
+      url = url + nodes.join(',');
+      this.http.get(url, options).subscribe(
+        (response) => {
+          const timebar = response.json().data;
+          this.ngRedux.dispatch({
+            type: 'LOAD_TIMEBAR',
+            payload: { timebar }
+          });
+        },
+        (err) => { }
+      );
+    } else {
+      this.ngRedux.dispatch({
+        type: 'LOAD_TIMEBAR',
+        payload: { }
+      });
+    }
   }
 
   /**

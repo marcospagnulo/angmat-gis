@@ -4,7 +4,11 @@ export interface Catalog {
   selectedNodes: any[];
 }
 
-const DEFAULTS: Catalog = { catalogNodes: null, catalogItems: null, selectedNodes: []};
+const DEFAULTS: Catalog = {
+  catalogNodes: null,
+  catalogItems: null,
+  selectedNodes: []
+};
 
 let catalogNodes, catalogItems, selectedNodes;
 

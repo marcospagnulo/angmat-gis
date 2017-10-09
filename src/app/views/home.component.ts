@@ -1,3 +1,4 @@
+import { Timebar } from '../store/timebar.reducer';
 import { Auth } from '../store/auth.reducer';
 import { Catalog } from '../store/catalog.reducer';
 import { Component, OnInit } from '@angular/core';
@@ -10,10 +11,11 @@ import * as L from 'leaflet';
 @Component({
   selector: 'home',
   template: `
-    <mat-card id="catalog-container">
-      <catalog></catalog>
-    </mat-card>
-    <div id="map"></div>
+  <mat-card id="catalog-container">
+    <catalog></catalog>
+  </mat-card>
+  <div id="map"></div>
+  <timebar></timebar>
   `
 })
 
@@ -30,7 +32,7 @@ export class HomeComponent implements OnInit {
     });
 
     this.ngRedux.select(['catalog']).subscribe((catalog: Catalog) => {
-      this.drawSelectedLayer(catalog);
+      this.actions.loadTimebar(catalog.selectedNodes.map((n) => n.id));
     });
   }
 
@@ -38,6 +40,7 @@ export class HomeComponent implements OnInit {
 
     // Init map
     this.map = new L.Map('map', {
+      zoomControl: false,
       center: new L.LatLng(40, 18),
       zoom: 8,
     });
@@ -64,10 +67,5 @@ export class HomeComponent implements OnInit {
         }
       }
     });
-
-    // Scarico la barra del tempo
-    if (catalog.selectedNodes.length > 0) {
-      this.actions.loadTimebar(catalog.selectedNodes.map((n) => n.id));
-    }
   }
 }

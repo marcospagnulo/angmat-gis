@@ -45,6 +45,8 @@ mat-toolbar{
   position: absolute;
   z-index: 999;
   top: 0;
+  width: 20% !important;
+  margin: 16px !important;
 }
 
 // Card
@@ -53,13 +55,9 @@ mat-card {
 }
 
 // Sidenav
-mat-sidenav-container{
-  padding-top: 64px;
-}
-
 mat-sidenav{
   width:200px;
-  padding: 72px 8px 8px 8px;
+  padding: 8px;
 }
 
 

@@ -1,0 +1,26 @@
+timebar{
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  z-index: 999;
+  width: 30%;
+  min-height: 50px;
+}
+
+timebar mat-card{
+  height: 100%
+}
+
+timebar .mat-spinner-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+timebar mat-spinner{
+  margin: auto;
+}
+
+timebar mat-spinner, timebar mat-spinner svg {
+  width: 50px !important;
+  height: 50px !important;
+}

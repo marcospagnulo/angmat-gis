@@ -1,3 +1,4 @@
+import { MapValuesPipe } from './common/mapValuesPipe';
 import { CatalogActions } from './actions/catalog.actions';
 import { AuthActions } from './actions/auth.actions';
 import { AuthorizedDirective } from './guard/authorized.directive';
@@ -10,6 +11,7 @@ import { HomeComponent } from './views/home.component';
 import { AppComponent } from './app.component';
 import { CatalogComponent } from './components/catalog/catalog.component';
 import { BranchComponent } from './components/catalog/branch.component';
+import { TimebarComponent } from './components/catalog/timebar.component';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -53,9 +55,10 @@ import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store'
 
 @NgModule({
   declarations: [
+    MapValuesPipe,
     AppComponent, HomeComponent, ReduxComponent, LoginComponent, AuthorizedDirective,
     DialogOverviewExampleDialog, SnackbarComponent,
-    CatalogComponent, BranchComponent
+    CatalogComponent, BranchComponent, TimebarComponent
   ],
   imports: [
     BrowserModule, HttpModule, FormsModule, NgReduxModule, AppRoutingModule,
@@ -65,7 +68,7 @@ import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store'
     MatButtonModule, MatCardModule, MatIconModule, MatRadioModule, MatSliderModule, MatMenuModule,
     MatToolbarModule, MatSidenavModule, MatInputModule, MatSelectModule, MatListModule,
     MatGridListModule, MatSnackBarModule, MatDialogModule, MatProgressSpinnerModule,
-    MatCheckboxModule
+    MatCheckboxModule, MatTabsModule
   ],
   providers: [DevicesActions, AuthActions, CatalogActions, AuthGuard],
   bootstrap: [AppComponent],

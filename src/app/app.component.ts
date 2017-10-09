@@ -9,18 +9,18 @@ import { IAppState } from './store/index';
   selector: 'app-root',
   template:
   `
-    <!-- Toolbar -->
-    <mat-toolbar color="primary" class="mat-elevation-z6 large-padding" *authorized>
-      <button mat-icon-button (click)="sidenav.toggle()">
-        <mat-icon>menu</mat-icon>
-      </button>
-      <h2>Demo Application</h2>
-    </mat-toolbar>
 
     <mat-sidenav-container>
+      <!-- Toolbar -->
+      <mat-toolbar color="primary" class="mat-elevation-z6 large-padding" *authorized>
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <h2>Demo Application</h2>
+      </mat-toolbar>
 
       <!-- Sidenav -->
-      <mat-sidenav #sidenav mode="side" opened="false" *authorized>
+      <mat-sidenav class="mat-elevation-z20" #sidenav mode="over" opened="false" *authorized>
         <mat-list class="small-padding">
           <button mat-button (click)="goToPage('/home')" mat-list-item>
             <mat-icon mat-list-icon>home</mat-icon>
@@ -63,6 +63,7 @@ export class AppComponent {
    */
   goToPage(page) {
     this.router.navigateByUrl(page);
+    this.sidenav.toggle();
   }
 
   /**
