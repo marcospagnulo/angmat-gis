@@ -81,13 +81,15 @@ export class LoginComponent implements OnInit {
 
   loginInProgress: boolean;
 
-  @select('auth') auth;
+  @select(['auth', 'loginError']) loginError;
 
-  constructor( private ngRedux: NgRedux<IAppState>, public actions: AuthActions, public dialog: MatDialog, public snackBar: MatSnackBar ) { }
+  constructor( private ngRedux: NgRedux<IAppState>, public actions: AuthActions,
+    public dialog: MatDialog, public snackBar: MatSnackBar ) { }
 
   ngOnInit() {
     const that = this;
-    this.ngRedux.select(['auth']).subscribe((auth: Auth) => {
+    this.loginError.subscribe((loginError: boolean) => {
+      console.log(loginError);
       setTimeout(function(){
         that.loginInProgress = false;
       }, 1000);
