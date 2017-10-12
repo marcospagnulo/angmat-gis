@@ -16,13 +16,13 @@ import { Timebar } from '../../store/timebar.reducer';
 
       <!-- Days -->
       <mat-tab-group #timebarTabs *ngIf="!(timebar | async).timebarLoading" class="timebar-days">
-        <mat-tab *ngFor="let d of days">
+        <mat-tab *ngFor="let day of timePerDay | mapKeys">
           <ng-template mat-tab-label>
-            <span class="text subhead">{{d}}</span>
+            <span class="text subhead">{{day | ddMM}}</span>
           </ng-template>
           <!-- Hours per day-->
           <mat-tab-group class="timebar-hours">
-            <mat-tab *ngFor="let h of timePerDay[d]">
+            <mat-tab *ngFor="let h of timePerDay.get(day)">
               <ng-template mat-tab-label>
                 <span (click)="selectTimeslice(h)" class="text body">{{h | HHmm}}</span>
               </ng-template>
@@ -56,9 +56,7 @@ export class TimebarComponent {
 
   showTimebar: boolean;
 
-  days: string[];
-
-  timePerDay: string[][] = [];
+  timePerDay: Map<number, number[]> = new Map();
 
   constructor( private ngRedux: NgRedux<IAppState>, public actions: CatalogActions) {
 
@@ -71,10 +69,9 @@ export class TimebarComponent {
 
       if (timeslices) {
 
-        // Itero i timeslice e costruisco una mappa con chiave il giorno di appartenenza il timeslice iterato
+        // Organizzo i timeslice suddividendoli per giorno
         for (const t of timeslices){
 
-          // la chiave della mappa è in MM/dd/yyyy
           const tdate = new Date(t.ts);
           const keyDate = new Date (0);
           keyDate.setDate(tdate.getDate());
@@ -82,16 +79,14 @@ export class TimebarComponent {
           keyDate.setFullYear(tdate.getFullYear());
           const key = this.formatDateDDMM(keyDate);
 
-          if (this.timePerDay[key]) {
-            this.timePerDay[key].push(tdate);
+          if (this.timePerDay.get(keyDate.getTime())) {
+            this.timePerDay.get(keyDate.getTime()).push(t.ts);
           } else {
-            this.timePerDay[key] = [tdate];
-            this.days.push(key);
+            this.timePerDay.set(keyDate.getTime(), [t.ts]);
           }
         }
       } else {
-        this.timePerDay = [];
-        this.days = [];
+        this.timePerDay = new Map();
       }
     });
   }
