@@ -17,6 +17,11 @@ export class CatalogActions {
 
   constructor( private ngRedux: NgRedux<IAppState>, private http: Http, private router: Router, private route: ActivatedRoute) { }
 
+  getCatalog() {
+
+
+  }
+
   /**
    * Carica il catalogo dei dati
    */
@@ -28,25 +33,37 @@ export class CatalogActions {
     myHeaders.append('companyId', Config.COMPANY_ID);
     myHeaders.append('password', user.password);
 
-    const options = new RequestOptions({ headers: myHeaders });
+    let catalogNodes, catalogItems;
+    try {
+      const nodes = localStorage.getItem('catalogNodes');
+      const items = localStorage.getItem('catalogItems');
+      catalogNodes = nodes !== undefined ? JSON.parse(nodes) : [];
+      catalogItems = items !== undefined ? JSON.parse(items) : [];
+    } catch (e) {
+      console.error(e);
+    }
 
-    this.http.get(
-      `${Config.API_HOST}/${Config.API_SERVICE}/${Config.API_CATALOG}`,
-      options
-    ).subscribe(
-      (data) => {
-        const catalogResponse = data.json();
-        const catalog = catalogResponse.data;
-        localStorage.setItem('catalog', JSON.stringify(catalog));
-        this.ngRedux.dispatch({
-          type: 'LOAD_CATALOG',
-          payload: { catalog }
-        });
-      },
-      (err) => {
+    if (!catalogNodes && !catalogItems) {
 
-      }
-    );
+      this.http.get(
+        `${Config.API_HOST}/${Config.API_SERVICE}/${Config.API_CATALOG}`,
+        new RequestOptions({ headers: myHeaders })
+      ).subscribe(
+        (data) => {
+
+          const catalogResponse = data.json();
+          const catalog = catalogResponse.data;
+          localStorage.setItem('catalogNodes', JSON.stringify(catalog.catalog));
+          localStorage.setItem('catalogItems', JSON.stringify(catalog.items));
+
+          this.ngRedux.dispatch({ type: 'LOAD_CATALOG', payload: { catalog } });
+        },
+        (err) => { }
+      );
+    } else {
+      const catalog = {catalog: catalogNodes, items: catalogItems, selectedNodes: []};
+      this.ngRedux.dispatch({ type: 'LOAD_CATALOG', payload: { catalog } });
+    }
   }
 
   /**

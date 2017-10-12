@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { select, NgRedux } from '@angular-redux/store';
 import { IAppState } from '../../store/index';
 import { CatalogActions } from '../../actions/catalog.actions';
@@ -15,7 +15,7 @@ import { Timebar } from '../../store/timebar.reducer';
       </div>
 
       <!-- Days -->
-      <mat-tab-group *ngIf="!(timebar | async).timebarLoading" class="timebar-days">
+      <mat-tab-group #timebarTabs *ngIf="!(timebar | async).timebarLoading" class="timebar-days">
         <mat-tab *ngFor="let d of days">
           <ng-template mat-tab-label>
             <span class="text subhead">{{d}}</span>
@@ -24,24 +24,35 @@ import { Timebar } from '../../store/timebar.reducer';
           <mat-tab-group class="timebar-hours">
             <mat-tab *ngFor="let h of timePerDay[d]">
               <ng-template mat-tab-label>
-                <span (click)="selectTimeslice(h)" class="text body">{{h}}</span>
+                <span (click)="selectTimeslice(h)" class="text body">{{h | HHmm}}</span>
               </ng-template>
             </mat-tab>
           </mat-tab-group>
         </mat-tab>
       </mat-tab-group>
 
+      <div>
+        <span class="text body fleft">{{selectedTimeslice | async | HHmm}}</span>
+        <span class="text body fright">{{productionDateText}}</span>
+        <span class="clear"></span>
+      </div>
     </mat-card>
 `
 })
 
 export class TimebarComponent {
 
+  @ViewChild('timebarTabs') timebarTabs;
+
+  @select(['catalog', 'selectedNodes']) selectedNodes;
+
   @select('timebar') timebar;
 
   @select(['timebar', 'timeslices']) timeslices;
 
-  @select(['timebar', 'selectedTimeslice']) selectedTimeslice ;
+  @select(['timebar', 'selectedTimeslice']) selectedTimeslice;
+
+  productionDateText: string;
 
   showTimebar: boolean;
 
@@ -51,14 +62,12 @@ export class TimebarComponent {
 
   constructor( private ngRedux: NgRedux<IAppState>, public actions: CatalogActions) {
 
-    this.selectedTimeslice.subscribe((selectedTimeslice: number) => {
-      console.log('selectedTimeslice', selectedTimeslice);
+    this.selectedNodes.subscribe((selectedNodes: any[]) => {
+      this.actions.selectTimeslice(null);
     });
 
     // Costruisco la barra del tempo in funzione dei timeslice caricati
     this.timeslices.subscribe((timeslices: Array<any>) => {
-
-      console.log('timeslices', timeslices);
 
       if (timeslices) {
 
@@ -74,9 +83,9 @@ export class TimebarComponent {
           const key = this.formatDateDDMM(keyDate);
 
           if (this.timePerDay[key]) {
-            this.timePerDay[key].push(this.formatDateHHmm(tdate));
+            this.timePerDay[key].push(tdate);
           } else {
-            this.timePerDay[key] = [this.formatDateHHmm(tdate)];
+            this.timePerDay[key] = [tdate];
             this.days.push(key);
           }
         }
@@ -87,9 +96,15 @@ export class TimebarComponent {
     });
   }
 
+  /**
+   * Imposta il timeslice selezionato
+   *
+   * @param h - timeslice
+   */
   selectTimeslice(h) {
     this.actions.selectTimeslice(h);
   }
+
   /**
    * Formatta una data nel formato dd/MM
    */

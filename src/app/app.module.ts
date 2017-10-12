@@ -1,4 +1,6 @@
 import { MapValuesPipe } from './common/mapValuesPipe';
+import { FormatHourPipe } from './common/formatHourPipe';
+import { FormatDayMonthPipe } from './common/formatDayMonthPipe';
 import { CatalogActions } from './actions/catalog.actions';
 import { AuthActions } from './actions/auth.actions';
 import { AuthorizedDirective } from './guard/authorized.directive';
@@ -55,7 +57,7 @@ import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store'
 
 @NgModule({
   declarations: [
-    MapValuesPipe,
+    MapValuesPipe, FormatHourPipe, FormatDayMonthPipe,
     AppComponent, HomeComponent, ReduxComponent, LoginComponent, AuthorizedDirective,
     DialogOverviewExampleDialog, SnackbarComponent,
     CatalogComponent, BranchComponent, TimebarComponent
