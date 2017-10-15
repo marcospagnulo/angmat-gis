@@ -6,18 +6,20 @@ export class Util {
   /**
    * Formatta una data nel formato dd/MM
    */
-  formatDateDDMM(tdate) {
-    const day = tdate.getDay() < 10 ? ('0' + tdate.getDay()) : tdate.getDay();
-    const month = tdate.getMonth() < 10 ? ('0' + tdate.getMonth()) : tdate.getMonth();
-    return day + '/' + month;
+  formatTimesliceDate(t) {
+    const tdate = new Date(t);
+    const day = tdate.getUTCDate() < 10 ? ('0' + tdate.getUTCDate()) : tdate.getUTCDate();
+    const month = tdate.getUTCMonth() < 9 ? ('0' + (tdate.getUTCMonth() + 1)) : tdate.getUTCMonth() + 1;
+    return tdate.getFullYear() + '' + month + '' + day;
   }
 
   /**
    * Formatta una data nel formato dd/MM
    */
-  formatDateHHmm(tdate) {
-    const hours = tdate.getHours() < 10 ? ('0' + tdate.getHours()) : tdate.getHours();
-    const minutes = tdate.getMinutes() < 10 ? ('0' + tdate.getMinutes()) : tdate.getMinutes();
-    return hours + ':' + minutes;
+  formatTimesliceTime(t) {
+    const tdate = new Date(t);
+    const hours = tdate.getUTCHours() < 10 ? ('0' + tdate.getUTCHours()) : tdate.getUTCHours();
+    const minutes = tdate.getUTCMinutes() < 10 ? ('0' + tdate.getUTCMinutes()) : tdate.getUTCMinutes();
+    return hours + '' + minutes;
   }
 }

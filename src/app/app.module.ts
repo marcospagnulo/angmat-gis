@@ -1,3 +1,4 @@
+import { Util } from './common/util';
 import { MapKeysPipe } from './common/mapKeysPipe';
 import { FormatHourPipe } from './common/formatHourPipe';
 import { FormatDayMonthPipe } from './common/formatDayMonthPipe';
@@ -73,7 +74,7 @@ import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store'
     MatGridListModule, MatSnackBarModule, MatDialogModule, MatProgressSpinnerModule,
     MatCheckboxModule, MatTabsModule
   ],
-  providers: [DevicesActions, AuthActions, CatalogActions, AuthGuard, TimebarActions],
+  providers: [DevicesActions, AuthActions, CatalogActions, AuthGuard, TimebarActions, Util],
   bootstrap: [AppComponent],
   entryComponents: [DialogOverviewExampleDialog, SnackbarComponent]
 })

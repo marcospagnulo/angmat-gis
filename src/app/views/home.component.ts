@@ -7,6 +7,7 @@ import { IAppState } from '../store/index';
 import { User } from '../model/user';
 import { CatalogActions } from '../actions/catalog.actions';
 import { TimebarActions } from '../actions/timebar.actions';
+import { Util } from '../common/util';
 import * as L from 'leaflet';
 
 @Component({
@@ -26,19 +27,37 @@ export class HomeComponent implements OnInit {
 
   map: L.Map;
 
-  constructor(private ngRedux: NgRedux<IAppState>, public catalogActions: CatalogActions, public timebarActions: TimebarActions  ) {
+  catalogItems: any[];
+
+  selectedNodes: any[];
+
+  timebar: Timebar;
+
+  constructor(private ngRedux: NgRedux<IAppState>, public catalogActions: CatalogActions,
+    public timebarActions: TimebarActions, public util: Util  ) {
 
     this.ngRedux.select(['auth', 'user']).subscribe((user: User) => {
       this.user = user;
     });
 
+    this.ngRedux.select(['catalog']).subscribe((catalog: Catalog) => {
+      this.catalogItems = catalog.catalogItems;
+    });
+
     this.ngRedux.select(['catalog', 'selectedNodes']).subscribe((selectedNodes: any[]) => {
-      console.log('selectedNodes', selectedNodes);
+      this.selectedNodes = selectedNodes;
       this.timebarActions.loadTimebar(selectedNodes);
     });
 
-    this.ngRedux.select(['timebar', 'timeslices']).subscribe((timeslices: number[]) => {
-      console.log('timeslices', timeslices);
+    this.ngRedux.select(['timebar']).subscribe((timebar: Timebar) => {
+      this.timebar = timebar;
+    });
+
+    this.ngRedux.select(['timebar', 'selectedTimeslice']).subscribe((selectedTimeslice: number) => {
+      console.log('selectedTimeslice', selectedTimeslice);
+      if (this.timebar != null && selectedTimeslice != null) {
+        this.reloadMap();
+      }
     });
   }
 
@@ -59,18 +78,31 @@ export class HomeComponent implements OnInit {
   /**
    * Disegna su mappa gli elementi di catalogo selezionati
    */
-  drawSelectedLayer(catalog) {
+  reloadMap() {
 
     // Recupero gli item di catalogo dai nodi selezionati
     const items = [];
-    catalog.selectedNodes.map(node => {
-      const itemIds = node.itemIds;
-      for (const itemId of itemIds) {
-        for (const item of catalog.catalogItems) {
-          if (itemId === item.id) {
-            items.push(item);
-          }
-        }
+    this.selectedNodes.map(node => node.itemIds.map(itemId => this.catalogItems.map(item => {
+      if (itemId === item.id) {
+        items.push(item);
+      }
+    })));
+
+    console.log('items', items);
+    items.map(item => {
+
+      if (item.type === 'FORECAST') {
+
+        const layer = this.timebar.timeslices[0].layers.find(l => l.layerId === item.id);
+        const productiondate = this.util.formatTimesliceDate(layer.productionDate);
+        const forecastdate = this.util.formatTimesliceDate(this.timebar.selectedTimeslice);
+        const forecasttime = this.util.formatTimesliceTime(this.timebar.selectedTimeslice);
+
+        let url = item.inMap.url;
+        url = url.replace('{productiondate}', productiondate);
+        url = url.replace('{forecastdate}', forecastdate);
+        url = url.replace('{forecasttime}', forecasttime);
+        this.map.addLayer( L.tileLayer(url, {tms: true}) );
       }
     });
   }

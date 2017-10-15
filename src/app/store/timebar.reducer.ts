@@ -15,7 +15,7 @@ export function TimebarReducer(state: Timebar = DEFAULTS, action: any ): any {
   switch (action.type) {
 
     case 'LOADING_TIMEBAR':
-      return Object.assign( {}, state, { timebarLoading: true } );
+      return Object.assign( {}, state, { selectedTimeslice: null, timebarLoading: true } );
 
     case 'LOAD_TIMEBAR':
       return Object.assign( {}, state, { timeslices: action.payload, timebarLoading: false } );
