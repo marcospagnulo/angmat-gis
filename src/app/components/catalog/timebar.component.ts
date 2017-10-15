@@ -15,13 +15,13 @@ import { Timebar } from '../../store/timebar.reducer';
       </div>
 
       <!-- Days -->
-      <mat-tab-group #timebarTabs *ngIf="!(timebar | async).timebarLoading" class="timebar-days">
+      <mat-tab-group *ngIf="!(timebar | async).timebarLoading" class="timebar-days">
         <mat-tab *ngFor="let day of timePerDay | mapKeys">
           <ng-template mat-tab-label>
             <span class="text subhead">{{day | ddMM}}</span>
           </ng-template>
           <!-- Hours per day-->
-          <mat-tab-group class="timebar-hours">
+          <mat-tab-group [selectedIndex]='selectedTimesliceIndex' class="timebar-hours">
             <mat-tab *ngFor="let h of timePerDay.get(day)">
               <ng-template mat-tab-label>
                 <span (click)="selectTimeslice(h)" class="text body">{{h | HHmm}}</span>
@@ -42,8 +42,6 @@ import { Timebar } from '../../store/timebar.reducer';
 
 export class TimebarComponent {
 
-  @ViewChild('timebarTabs') timebarTabs;
-
   @select(['catalog', 'selectedNodes']) selectedNodes;
 
   @select('timebar') timebar;
@@ -51,6 +49,8 @@ export class TimebarComponent {
   @select(['timebar', 'timeslices']) timeslices;
 
   @select(['timebar', 'selectedTimeslice']) selectedTimeslice;
+
+  selectedTimesliceIndex: number;
 
   productionDateText: string;
 
@@ -60,8 +60,15 @@ export class TimebarComponent {
 
   constructor( private ngRedux: NgRedux<IAppState>, public actions: CatalogActions) {
 
-    this.selectedNodes.subscribe((selectedNodes: any[]) => {
-      this.actions.selectTimeslice(null);
+    this.selectedTimeslice.subscribe((selectedTimeslice: number) => {
+      if (selectedTimeslice != null) {
+        this.timePerDay.forEach(timeslices => {
+          const index = timeslices.indexOf(selectedTimeslice);
+          if (index > 0) {
+            this.selectedTimesliceIndex = index;
+          }
+        });
+      }
     });
 
     // Costruisco la barra del tempo in funzione dei timeslice caricati
@@ -77,7 +84,6 @@ export class TimebarComponent {
           keyDate.setDate(tdate.getDate());
           keyDate.setMonth(tdate.getMonth());
           keyDate.setFullYear(tdate.getFullYear());
-          const key = this.formatDateDDMM(keyDate);
 
           if (this.timePerDay.get(keyDate.getTime())) {
             this.timePerDay.get(keyDate.getTime()).push(t.ts);
@@ -98,24 +104,6 @@ export class TimebarComponent {
    */
   selectTimeslice(h) {
     this.actions.selectTimeslice(h);
-  }
-
-  /**
-   * Formatta una data nel formato dd/MM
-   */
-  formatDateDDMM(tdate) {
-    const day = tdate.getDay() < 10 ? ('0' + tdate.getDay()) : tdate.getDay();
-    const month = tdate.getMonth() < 10 ? ('0' + tdate.getMonth()) : tdate.getMonth();
-    return day + '/' + month;
-  }
-
-  /**
-   * Formatta una data nel formato dd/MM
-   */
-  formatDateHHmm(tdate) {
-    const hours = tdate.getHours() < 10 ? ('0' + tdate.getHours()) : tdate.getHours();
-    const minutes = tdate.getMinutes() < 10 ? ('0' + tdate.getMinutes()) : tdate.getMinutes();
-    return hours + ':' + minutes;
   }
 
 }

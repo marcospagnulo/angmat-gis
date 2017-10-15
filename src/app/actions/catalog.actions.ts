@@ -73,35 +73,42 @@ export class CatalogActions {
    */
   loadTimebar(nodes) {
 
-    const user = JSON.parse(localStorage.getItem('user'));
-    const myHeaders = new Headers();
-    myHeaders.append('userId', user.id);
-    myHeaders.append('companyId', Config.COMPANY_ID);
-    myHeaders.append('password', user.password);
-
-    const options = new RequestOptions({ headers: myHeaders });
-
-
     if (nodes && nodes.length > 0) {
 
+      // Evento di caricamento in corso
       this.ngRedux.dispatch({
         type: 'LOADING_TIMEBAR',
         payload: true
       });
 
+      const user = JSON.parse(localStorage.getItem('user'));
+      const myHeaders = new Headers();
+      myHeaders.append('userId', user.id);
+      myHeaders.append('companyId', Config.COMPANY_ID);
+      myHeaders.append('password', user.password);
+      const options = new RequestOptions({ headers: myHeaders });
+
       let url = `${Config.API_HOST}/${Config.API_SERVICE}/${Config.API_CATALOG_TIMESLICES}`;
       url = url + nodes.join(',');
       this.http.get(url, options).subscribe(
         (response) => {
+
           const timebar = response.json().data;
+
           this.ngRedux.dispatch({
             type: 'LOAD_TIMEBAR',
-            payload: { timebar }
+            payload: timebar
+          });
+
+          this.ngRedux.dispatch({
+            type: 'SELECT_TIMESLICE',
+            payload: timebar[3].ts
           });
         },
         (err) => { }
       );
     } else {
+
       this.ngRedux.dispatch({
         type: 'LOAD_TIMEBAR',
         payload: { }

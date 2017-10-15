@@ -1,3 +1,6 @@
+*{
+}
+
 .small-padding{
   padding: 8px;
 }
@@ -13,3 +16,16 @@
 #map {
   height: 100%;
 }
+
+.mat-show{
+  max-height: 999px;
+  transition: all 0.5s ease-in;
+  overflow: hidden;
+}
+
+.mat-hide{
+  transition: all 0.25s ease-out;
+  max-height: 0;
+  overflow: hidden;
+}
+
