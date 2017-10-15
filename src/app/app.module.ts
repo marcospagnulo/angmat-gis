@@ -3,6 +3,7 @@ import { FormatHourPipe } from './common/formatHourPipe';
 import { FormatDayMonthPipe } from './common/formatDayMonthPipe';
 import { CatalogActions } from './actions/catalog.actions';
 import { AuthActions } from './actions/auth.actions';
+import { TimebarActions } from './actions/timebar.actions';
 import { AuthorizedDirective } from './guard/authorized.directive';
 import { DialogOverviewExampleDialog, LoginComponent, SnackbarComponent } from './views/login.component';
 import { AuthGuard } from './guard/auth.guard';
@@ -72,7 +73,7 @@ import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store'
     MatGridListModule, MatSnackBarModule, MatDialogModule, MatProgressSpinnerModule,
     MatCheckboxModule, MatTabsModule
   ],
-  providers: [DevicesActions, AuthActions, CatalogActions, AuthGuard],
+  providers: [DevicesActions, AuthActions, CatalogActions, AuthGuard, TimebarActions],
   bootstrap: [AppComponent],
   entryComponents: [DialogOverviewExampleDialog, SnackbarComponent]
 })

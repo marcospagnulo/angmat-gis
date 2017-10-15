@@ -1,7 +1,7 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { select, NgRedux } from '@angular-redux/store';
 import { IAppState } from '../../store/index';
-import { CatalogActions } from '../../actions/catalog.actions';
+import { TimebarActions } from '../../actions/timebar.actions';
 import { Timebar } from '../../store/timebar.reducer';
 
 @Component({
@@ -58,7 +58,7 @@ export class TimebarComponent {
 
   timePerDay: Map<number, number[]> = new Map();
 
-  constructor( private ngRedux: NgRedux<IAppState>, public actions: CatalogActions) {
+  constructor( private ngRedux: NgRedux<IAppState>, public actions: TimebarActions) {
 
     this.selectedTimeslice.subscribe((selectedTimeslice: number) => {
       if (selectedTimeslice != null) {

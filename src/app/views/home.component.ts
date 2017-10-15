@@ -6,6 +6,7 @@ import { select, NgRedux } from '@angular-redux/store';
 import { IAppState } from '../store/index';
 import { User } from '../model/user';
 import { CatalogActions } from '../actions/catalog.actions';
+import { TimebarActions } from '../actions/timebar.actions';
 import * as L from 'leaflet';
 
 @Component({
@@ -25,14 +26,19 @@ export class HomeComponent implements OnInit {
 
   map: L.Map;
 
-  constructor(private ngRedux: NgRedux<IAppState>, public actions: CatalogActions ) {
+  constructor(private ngRedux: NgRedux<IAppState>, public catalogActions: CatalogActions, public timebarActions: TimebarActions  ) {
 
-    this.ngRedux.select(['auth']).subscribe((auth: Auth) => {
-      this.user = auth.user;
+    this.ngRedux.select(['auth', 'user']).subscribe((user: User) => {
+      this.user = user;
     });
 
-    this.ngRedux.select(['catalog']).subscribe((catalog: Catalog) => {
-      this.actions.loadTimebar(catalog.selectedNodes.map((n) => n.id));
+    this.ngRedux.select(['catalog', 'selectedNodes']).subscribe((selectedNodes: any[]) => {
+      console.log('selectedNodes', selectedNodes);
+      this.timebarActions.loadTimebar(selectedNodes);
+    });
+
+    this.ngRedux.select(['timebar', 'timeslices']).subscribe((timeslices: number[]) => {
+      console.log('timeslices', timeslices);
     });
   }
 
