@@ -32,7 +32,7 @@ import { CatalogActions } from '../../actions/catalog.actions';
 
     <!-- Catalog node children -->
     <mat-list *ngIf="node.children"
-      [style.display]="open ? 'block' : 'none'">
+      [ngClass]="{'mat-show': open, 'mat-hide': !open}">
       <branch mat-list-item
         *ngFor="let node of node.children"
         [node]='node'>

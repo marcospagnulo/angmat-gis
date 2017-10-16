@@ -17,11 +17,6 @@ export class CatalogActions {
 
   constructor( private ngRedux: NgRedux<IAppState>, private http: Http, private router: Router, private route: ActivatedRoute) { }
 
-  getCatalog() {
-
-
-  }
-
   /**
    * Carica il catalogo dei dati
    */
@@ -66,58 +61,7 @@ export class CatalogActions {
     }
   }
 
-  /**
-   * Scarica la barra del tempo in base ai nodi di catalogo selezionati
-   *
-   * @param nodes - nodi di catalogo selezionati
-   */
-  loadTimebar(nodes) {
-
-    if (nodes && nodes.length > 0) {
-
-      this.ngRedux.dispatch({
-        type: 'LOADING_TIMEBAR',
-        payload: true
-      });
-
-      const user = JSON.parse(localStorage.getItem('user'));
-      const myHeaders = new Headers();
-      myHeaders.append('userId', user.id);
-      myHeaders.append('companyId', Config.COMPANY_ID);
-      myHeaders.append('password', user.password);
-      const options = new RequestOptions({ headers: myHeaders });
-      let url = `${Config.API_HOST}/${Config.API_SERVICE}/${Config.API_CATALOG_TIMESLICES}`;
-      url = url + nodes.join(',');
-
-      this.http.get(url, options).subscribe(
-        (response) => {
-
-          const timebar = response.json().data;
-          this.ngRedux.dispatch({
-            type: 'LOAD_TIMEBAR',
-            payload: { timebar }
-          });
-
-          // Preseleziono un timeslice dalla barra del tempo scaricata
-          const selectedTimeslice = timebar ? timebar[2].ts : null;
-          this.ngRedux.dispatch({
-            type: 'SELECT_TIMESLICE',
-            payload: selectedTimeslice
-          });
-        },
-        (err) => { }
-      );
-    } else {
-
-      this.ngRedux.dispatch({
-        type: 'LOAD_TIMEBAR',
-        payload: { }
-      });
-    }
-  }
-
-  /**
-   * Toggle di selezione su un nodo di catalogo
+   /** Toggle di selezione su un nodo di catalogo
    *
    * @param node - nodo di catalogo
    * @param selected - indica se il nodo è stato selezionato o deselzionato
@@ -126,18 +70,6 @@ export class CatalogActions {
     this.ngRedux.dispatch({
       type: selected ? 'REMOVE_SELECT_NODE' : 'ADD_SELECT_NODE',
       payload: { node }
-    });
-  }
-
-  /**
-   * Imposta l'orario selezionato
-   *
-   * @param t - orario selezionato
-   */
-  selectTimeslice(t) {
-    this.ngRedux.dispatch({
-      type: 'SELECT_TIMESLICE',
-      payload: t
     });
   }
 }

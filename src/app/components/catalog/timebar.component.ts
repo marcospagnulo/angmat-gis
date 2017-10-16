@@ -1,7 +1,7 @@
 import { Component, Input, ViewChild, AfterViewInit } from '@angular/core';
 import { select, NgRedux } from '@angular-redux/store';
 import { IAppState } from '../../store/index';
-import { CatalogActions } from '../../actions/catalog.actions';
+import { TimebarActions } from '../../actions/timebar.actions';
 import { Timebar } from '../../store/timebar.reducer';
 
 @Component({
@@ -58,16 +58,18 @@ export class TimebarComponent {
 
   timePerDay: Map<number, number[]> = new Map();
 
-  constructor( private ngRedux: NgRedux<IAppState>, public actions: CatalogActions) {
+  constructor( private ngRedux: NgRedux<IAppState>, public actions: TimebarActions) {
 
     // Imposto la l'indice di selezione alla selezione di un timeslice
     this.selectedTimeslice.subscribe((selectedTimeslice: number) => {
-      this.timePerDay.forEach(timeslices => {
-        const index = timeslices.indexOf(selectedTimeslice);
-        if (index > 0) {
-          this.selectedTimesliceIndex = index;
-        }
-      });
+      if (selectedTimeslice != null) {
+        this.timePerDay.forEach(timeslices => {
+          const index = timeslices.indexOf(selectedTimeslice);
+          if (index > 0) {
+            this.selectedTimesliceIndex = index;
+          }
+        });
+      }
     });
 
     // Costruisco la barra del tempo in funzione dei timeslice caricati

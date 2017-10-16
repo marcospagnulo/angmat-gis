@@ -5,8 +5,8 @@ export interface Catalog {
 }
 
 const DEFAULTS: Catalog = {
-  catalogNodes: null,
-  catalogItems: null,
+  catalogNodes: [],
+  catalogItems: [],
   selectedNodes: []
 };
 
