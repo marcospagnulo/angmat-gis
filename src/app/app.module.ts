@@ -15,7 +15,8 @@ import { HomeComponent } from './views/home.component';
 import { AppComponent } from './app.component';
 import { CatalogComponent } from './components/catalog/catalog.component';
 import { BranchComponent } from './components/catalog/branch.component';
-import { TimebarComponent } from './components/catalog/timebar.component';
+import { TimebarComponent } from './components/timebar.component';
+import { MapLayersComponent } from './components/mapLayers.component';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -62,7 +63,7 @@ import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store'
     MapKeysPipe, FormatHourPipe, FormatDayMonthPipe,
     AppComponent, HomeComponent, ReduxComponent, LoginComponent, AuthorizedDirective,
     DialogOverviewExampleDialog, SnackbarComponent,
-    CatalogComponent, BranchComponent, TimebarComponent
+    CatalogComponent, BranchComponent, TimebarComponent, MapLayersComponent
   ],
   imports: [
     BrowserModule, HttpModule, FormsModule, NgReduxModule, AppRoutingModule,

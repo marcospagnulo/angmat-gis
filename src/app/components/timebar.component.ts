@@ -1,8 +1,8 @@
 import { Component, Input, ViewChild, AfterViewInit } from '@angular/core';
 import { select, NgRedux } from '@angular-redux/store';
-import { IAppState } from '../../store/index';
-import { TimebarActions } from '../../actions/timebar.actions';
-import { Timebar } from '../../store/timebar.reducer';
+import { IAppState } from '../store/index';
+import { TimebarActions } from '../actions/timebar.actions';
+import { Timebar } from '../store/timebar.reducer';
 
 @Component({
   selector: 'timebar',

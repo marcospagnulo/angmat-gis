@@ -4,10 +4,7 @@ html, body, material-app, mat-sidenav-container, .app-content {
   height: 100%;
 }
 
-.mat-list-icon {
-  color: rgba(0, 0, 0, 0.54);
-}
-
+// Text style
 .text{
   color:rgba(0, 0, 0, 0.87) !important;
 }
@@ -80,6 +77,19 @@ mat-sidenav button .mat-button-wrapper{
 mat-sidenav button mat-icon{
   margin-right: 16px;
   margin-left: 8px;
+}
+
+// List
+.mat-list-item-content {
+  padding: 0 !important;
+}
+
+.mat-list .mat-list-item .mat-list-item-content, .mat-nav-list .mat-list-item .mat-list-item-content, .mat-selection-list .mat-list-item .mat-list-item-content{
+  height: 40px !important;
+}
+
+.mat-list-icon {
+  color: rgba(0, 0, 0, 0.54);
 }
 
 // Button

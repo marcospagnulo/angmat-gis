@@ -6,7 +6,7 @@ import { CatalogActions } from '../../actions/catalog.actions';
 @Component({
   selector: 'catalog',
   template: `
-    <span class="text subhead">Catalogo dei dati</span>
+    <span class="text title">Catalogo dei dati</span>
     <mat-list>
       <branch mat-list-item *ngFor="let node of (catalog | async).catalogNodes" [node]='node'></branch>
       <div *ngIf="(catalog | async).catalogNodes === null" class="mat-spinner-container large-padding">

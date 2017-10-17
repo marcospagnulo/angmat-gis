@@ -18,6 +18,7 @@ import * as L from 'leaflet';
   </mat-card>
   <div id="map"></div>
   <timebar></timebar>
+  <map-layers></map-layers>
   `
 })
 
@@ -35,8 +36,10 @@ export class HomeComponent implements OnInit {
 
   layers: any[] = [];
 
+  loadTimebarPID: any = null;
+
   constructor(private ngRedux: NgRedux<IAppState>, public catalogActions: CatalogActions,
-    public timebarActions: TimebarActions, public util: Util  ) {
+    public timebarActions: TimebarActions, public util: Util) {
 
     this.ngRedux.select(['auth', 'user']).subscribe((user: User) => {
       this.user = user;
@@ -47,17 +50,28 @@ export class HomeComponent implements OnInit {
     });
 
     this.ngRedux.select(['catalog', 'selectedNodes']).subscribe((selectedNodes: any[]) => {
-      console.log('selectedNodes');
       this.selectedNodes = selectedNodes;
-      this.timebarActions.loadTimebar(selectedNodes);
-      this.clearMap();
+      if (this.loadTimebarPID !== null) {
+        clearTimeout(this.loadTimebarPID);
+      }
+      this.loadTimebarPID = setTimeout(() => this.timebarActions.loadTimebar(selectedNodes), 1000);
     });
 
     this.ngRedux.select(['timebar']).subscribe((timebar: Timebar) => {
-      console.log('timebar', timebar);
       this.timebar = timebar;
       if (timebar.selectedTimeslice != null) {
+        console.log('clear map');
+        this.clearMap();
+      }
+    });
+
+    this.ngRedux.select(['timebar', 'selectedTimeslice']).subscribe((selectedTimeslice: number) => {
+      if (selectedTimeslice != null) {
+        console.log('reload map');
         this.reloadMap();
+      } else {
+        console.log('clear map');
+        this.clearMap();
       }
     });
   }
@@ -80,7 +94,6 @@ export class HomeComponent implements OnInit {
    *  Rimuovo tutti i layer aggiunti dalla mappa
    */
   clearMap() {
-    console.log('clear map');
     for (const layer of this.layers) {
       this.map.removeLayer(layer);
     }
@@ -91,8 +104,6 @@ export class HomeComponent implements OnInit {
    * Disegna su mappa gli elementi di catalogo selezionati
    */
   reloadMap() {
-
-    console.log('reload map');
 
     // Recupero gli item di catalogo dai nodi selezionati
     const items = [];
@@ -111,7 +122,6 @@ export class HomeComponent implements OnInit {
       if (item.type === 'FORECAST') {
 
         // Recupero le date dal time slice per formattare l'url TMS della previsione
-        console.log('timebar', this.timebar);
         const timesliceLayer = this.timebar.timeslices[0].layers.find(l => l.layerId === item.id);
 
         if (timesliceLayer !== undefined) {
@@ -125,7 +135,7 @@ export class HomeComponent implements OnInit {
           url = url.replace('{productiondate}', productiondate);
           url = url.replace('{forecastdate}', forecastdate);
           url = url.replace('{forecasttime}', forecasttime);
-          const layer = L.tileLayer(url, {tms: true});
+          const layer = L.tileLayer(url, { tms: true });
 
           // Aggiungo il layer alla mappa e salvo il riferimento in un array
           this.layers.push(layer);
