@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
     });
 
     this.ngRedux.select(['catalog', 'selectedNodes']).subscribe((selectedNodes: any[]) => {
-      console.log('selectedNodes', selectedNodes);
+      console.log('selectedNodes');
       this.selectedNodes = selectedNodes;
       this.timebarActions.loadTimebar(selectedNodes);
       this.clearMap();
@@ -56,11 +56,7 @@ export class HomeComponent implements OnInit {
     this.ngRedux.select(['timebar']).subscribe((timebar: Timebar) => {
       console.log('timebar', timebar);
       this.timebar = timebar;
-    });
-
-    this.ngRedux.select(['timebar', 'selectedTimeslice']).subscribe((selectedTimeslice: number) => {
-      console.log('selectedTimeslice', selectedTimeslice);
-      if (selectedTimeslice != null) {
+      if (timebar.selectedTimeslice != null) {
         this.reloadMap();
       }
     });
@@ -96,7 +92,7 @@ export class HomeComponent implements OnInit {
    */
   reloadMap() {
 
-    console.log('clear map');
+    console.log('reload map');
 
     // Recupero gli item di catalogo dai nodi selezionati
     const items = [];
