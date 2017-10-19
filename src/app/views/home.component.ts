@@ -49,28 +49,31 @@ export class HomeComponent implements OnInit {
       this.catalogItems = catalog.catalogItems;
     });
 
+    this.ngRedux.select(['timebar']).subscribe((timebar: Timebar) => {
+      this.timebar = timebar;
+    });
+
+    // la selezione di nodi di catalogo prevede il ricaricamento della timebar
     this.ngRedux.select(['catalog', 'selectedNodes']).subscribe((selectedNodes: any[]) => {
-      this.selectedNodes = selectedNodes;
+
       if (this.loadTimebarPID !== null) {
         clearTimeout(this.loadTimebarPID);
       }
-      this.loadTimebarPID = setTimeout(() => this.timebarActions.loadTimebar(selectedNodes), 1000);
-    });
 
-    this.ngRedux.select(['timebar']).subscribe((timebar: Timebar) => {
-      this.timebar = timebar;
-      if (timebar.selectedTimeslice != null) {
-        console.log('clear map');
+      this.selectedNodes = selectedNodes;
+      if (this.selectedNodes.length > 0) {
+        this.loadTimebarPID = setTimeout(() => this.timebarActions.loadTimebar(selectedNodes), 1000);
+      } else {
         this.clearMap();
       }
     });
 
+    // Alla selezione di un timeslice ricarico i layer sulla mappa
     this.ngRedux.select(['timebar', 'selectedTimeslice']).subscribe((selectedTimeslice: number) => {
+      console.log('selectedTimeslice', selectedTimeslice);
       if (selectedTimeslice != null) {
-        console.log('reload map');
         this.reloadMap();
       } else {
-        console.log('clear map');
         this.clearMap();
       }
     });
@@ -94,10 +97,10 @@ export class HomeComponent implements OnInit {
    *  Rimuovo tutti i layer aggiunti dalla mappa
    */
   clearMap() {
-    for (const layer of this.layers) {
-      this.map.removeLayer(layer);
-    }
-    this.layers = [];
+      for (const layer of this.layers) {
+        this.map.removeLayer(layer);
+      }
+      this.layers = [];
   }
 
   /**
@@ -139,7 +142,9 @@ export class HomeComponent implements OnInit {
 
           // Aggiungo il layer alla mappa e salvo il riferimento in un array
           this.layers.push(layer);
-          this.map.addLayer(layer);
+          setTimeout(() => {
+            this.map.addLayer(layer);
+          }, 50);
         }
       }
     });
