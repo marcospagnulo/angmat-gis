@@ -6,6 +6,7 @@ import { CatalogActions } from '../../actions/catalog.actions';
 @Component({
   selector: 'catalog',
   template: `
+  <mat-card id="catalog-container">
     <span class="text title">Catalogo dei dati</span>
     <mat-list>
       <branch mat-list-item *ngFor="let node of (catalog | async).catalogNodes" [node]='node'></branch>
@@ -13,6 +14,7 @@ import { CatalogActions } from '../../actions/catalog.actions';
         <mat-spinner></mat-spinner>
       </div>
     </mat-list>
+  </mat-card>
 `
 })
 

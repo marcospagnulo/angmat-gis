@@ -13,9 +13,7 @@ import * as L from 'leaflet';
 @Component({
   selector: 'home',
   template: `
-  <mat-card id="catalog-container">
-    <catalog></catalog>
-  </mat-card>
+  <catalog></catalog>
   <div id="map"></div>
   <timebar></timebar>
   <map-layers></map-layers>
