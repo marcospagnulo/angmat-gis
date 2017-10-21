@@ -53,42 +53,63 @@ export class TimebarComponent {
 
   constructor( public actions: TimebarActions, public app: AppState) {
 
+    this.selectTImeslice(app.selectedTimeslice);
+    this.reloadTimebar(app.timebar);
+
     // Imposto la l'indice di selezione alla selezione di un timeslice
     app.onTimesliceSelected.subscribe((selectedTimeslice: number) => {
-      if (selectedTimeslice != null) {
-        this.timePerDay.forEach(timeslices => {
-          const index = timeslices.indexOf(selectedTimeslice);
-          if (index > 0) {
-            this.selectedTimesliceIndex = index;
-          }
-        });
-      }
+      this.selectTImeslice(selectedTimeslice);
     });
 
     // Costruisco la barra del tempo in funzione dei timeslice caricati
     app.onTimebarLoad.subscribe((timebar: Timebar) => {
+      this.reloadTimebar(timebar);
+    });
+  }
 
-      this.timePerDay = new Map();
+  /**
+   * Seleziona un tima slice dalla barra del tempo
+   *
+   * @param selectedTimeslice
+   */
+  selectTImeslice(selectedTimeslice) {
+    if (selectedTimeslice != null) {
+      this.timePerDay.forEach(timeslices => {
+        const index = timeslices.indexOf(selectedTimeslice);
+        if (index > 0) {
+          this.selectedTimesliceIndex = index;
+        }
+      });
+    }
+  }
 
-      if (timebar.timeslices) {
+  /**
+   * Ricarica la barra del tempo
+   *
+   * @param timebar
+   */
+  reloadTimebar(timebar) {
 
-        // Organizzo i timeslice suddividendoli per giorno
-        for (const t of timebar.timeslices){
+    this.timePerDay = new Map();
 
-          const tdate = new Date(t.ts);
-          const keyDate = new Date (0);
-          keyDate.setDate(tdate.getDate());
-          keyDate.setMonth(tdate.getMonth());
-          keyDate.setFullYear(tdate.getFullYear());
+    if (timebar.timeslices) {
 
-          if (this.timePerDay.get(keyDate.getTime())) {
-            this.timePerDay.get(keyDate.getTime()).push(t.ts);
-          } else {
-            this.timePerDay.set(keyDate.getTime(), [t.ts]);
-          }
+      // Organizzo i timeslice suddividendoli per giorno
+      for (const t of timebar.timeslices){
+
+        const tdate = new Date(t.ts);
+        const keyDate = new Date (0);
+        keyDate.setDate(tdate.getDate());
+        keyDate.setMonth(tdate.getMonth());
+        keyDate.setFullYear(tdate.getFullYear());
+
+        if (this.timePerDay.get(keyDate.getTime())) {
+          this.timePerDay.get(keyDate.getTime()).push(t.ts);
+        } else {
+          this.timePerDay.set(keyDate.getTime(), [t.ts]);
         }
       }
-    });
+    }
   }
 
   /**
