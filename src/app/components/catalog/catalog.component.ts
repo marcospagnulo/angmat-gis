@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { select, NgRedux } from '@angular-redux/store';
-import { IAppState } from '../../store/index';
 import { AppState } from '../../app.state';
 
 @Component({
@@ -19,8 +17,5 @@ import { AppState } from '../../app.state';
 })
 
 export class CatalogComponent {
-
-  @select('catalog') catalog;
-
-  constructor( private ngRedux: NgRedux<IAppState>, public app: AppState ) { }
+  constructor( public app: AppState ) { }
 }

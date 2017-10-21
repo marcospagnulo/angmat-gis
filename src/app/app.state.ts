@@ -18,10 +18,14 @@ export class AppState {
 
   timebar: Timebar;
 
+  selectedTimeslice: number;
+
   // Events
   @Output() onSelectNodes: EventEmitter<any[]> = new EventEmitter();
 
   @Output() onTimebarLoad: EventEmitter<Timebar> = new EventEmitter();
+
+  @Output() onTimesliceSelected: EventEmitter<number> = new EventEmitter();
 
 
   constructor (private ngRedux: NgRedux<IAppState>, public catalogActions: CatalogActions) {
@@ -38,19 +42,27 @@ export class AppState {
       this.catalog = catalog;
     });
 
+    // Catalog node selection subscriber
+    this.ngRedux.select(['catalog', 'selectedNodes']).subscribe((selectedNodes: any[]) => {
+      console.log('onSelectNodes', selectedNodes);
+      this.selectedNodes = selectedNodes;
+      this.onSelectNodes.emit(selectedNodes);
+    });
+
     // Timebar subscriber
     this.ngRedux.select(['timebar']).subscribe((timebar: Timebar) => {
-      console.log('timebar', timebar);
+      console.log('onTimebarLoad', timebar);
       this.timebar = timebar;
       this.onTimebarLoad.emit(timebar);
     });
 
-    // Catalog node selection subscriber
-    this.ngRedux.select(['catalog', 'selectedNodes']).subscribe((selectedNodes: any[]) => {
-      console.log('selectedNodes', selectedNodes);
-      this.selectedNodes = selectedNodes;
-      this.onSelectNodes.emit(selectedNodes);
+    // Timeslice selection subscriber
+    this.ngRedux.select(['timebar', 'selectedTimeslice']).subscribe((selectedTimeslice: number) => {
+      console.log('onTimesliceSelected', selectedTimeslice);
+      this.selectedTimeslice = selectedTimeslice;
+      this.onTimesliceSelected.emit(selectedTimeslice);
     });
+
   }
 
 }
