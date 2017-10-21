@@ -50,8 +50,6 @@ export class AppComponent {
 
   @ViewChild('sidenav') sidenav;
 
-  @select('config') config;   // use angular-redux select decorator
-
   constructor( private ngRedux: NgRedux<IAppState>, public actions: AuthActions, private router: Router, private route: ActivatedRoute ) {
 
   }
@@ -79,13 +77,6 @@ export class AppComponent {
    */
   toggleSideNav() {
     this.sidenav.toggle();
-  }
-
-  changeColor(color: string) {
-    this.ngRedux.dispatch({
-      type: 'SET_THEME_COLOR',
-      payload: { color }
-    });
   }
 
 }

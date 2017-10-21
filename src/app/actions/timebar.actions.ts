@@ -52,25 +52,21 @@ export class TimebarActions {
       this.http.get(url, options).subscribe(
         (response) => {
 
-          const timebar = response.json().data;
+          const timeslices = response.json().data;
+          const timebar = { timeslices: timeslices, selectedTimeslice: timeslices[0].ts, timebarLoading: false };
 
           this.ngRedux.dispatch({
             type: 'LOAD_TIMEBAR',
             payload: timebar
           });
-
-          this.ngRedux.dispatch({
-            type: 'SELECT_TIMESLICE',
-            payload: timebar[3].ts
-          });
         },
         (err) => { }
       );
     } else {
-
+      const timebar = { timeslices: [], selectedTimeslice: null, timebarLoading: false };
       this.ngRedux.dispatch({
         type: 'LOAD_TIMEBAR',
-        payload: []
+        payload: timebar
       });
     }
   }

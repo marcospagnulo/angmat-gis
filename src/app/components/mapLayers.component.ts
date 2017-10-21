@@ -21,7 +21,7 @@ export class MapLayersComponent {
   constructor( private ngRedux: NgRedux<IAppState>) {
 
     this.selectedNodes.subscribe((selectedNodes: any[]) => {
-      console.log('selectedNodes', selectedNodes);
+
     });
   }
 
