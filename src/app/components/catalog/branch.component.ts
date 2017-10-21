@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { select, NgRedux } from '@angular-redux/store';
+import { AppState } from '../../app.state';
+import { Component, Input, OnInit } from '@angular/core';
 import { IAppState } from '../../store/index';
 import { CatalogActions } from '../../actions/catalog.actions';
 
@@ -41,7 +41,7 @@ import { CatalogActions } from '../../actions/catalog.actions';
 `
 })
 
-export class BranchComponent {
+export class BranchComponent implements OnInit {
 
   @Input() node: any;
 
@@ -49,7 +49,16 @@ export class BranchComponent {
 
   selected: boolean;
 
-  constructor( private ngRedux: NgRedux<IAppState>, public actions: CatalogActions) { }
+  constructor( public app: AppState, public actions: CatalogActions) { }
+
+  ngOnInit() {
+    this.selected = this.isSelected(this.node.id);
+  }
+
+  isSelected(id) {
+    const res = this.app.selectedNodes.find( node => node.id === id);
+    return this.app.selectedNodes.find( node => node.id === id) !== undefined;
+  }
 
   /**
    * Apre/chiude un nodo del catalogo
