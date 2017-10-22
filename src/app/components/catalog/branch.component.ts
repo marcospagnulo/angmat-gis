@@ -7,16 +7,16 @@ import { CatalogActions } from '../../actions/catalog.actions';
   selector: 'branch',
   template: `
 
-    <mat-list-item>
+    <button mat-list-item mat-button (click)="toggleNode()">
 
       <!-- Catalog node -->
-      <button mat-icon-button
-        *ngIf="!node.leaf"
-        (click)="toggleNode()">
-        <mat-icon>{{open ? 'folder_open' : 'folder'}}</mat-icon>
-      </button>
-      <span *ngIf="!node.leaf"
-        class="text body">
+      <mat-icon mat-list-icon
+        class="black"
+        *ngIf="!node.leaf">
+        {{open ? 'folder_open' : 'folder'}}
+      </mat-icon>
+      <span mat-line *ngIf="!node.leaf"
+        class="text body catalog-node-label">
         {{node.title}}
       </span>
 
@@ -28,12 +28,12 @@ import { CatalogActions } from '../../actions/catalog.actions';
         [(ngModel)]="selected">
         {{node.title}}
       </mat-checkbox>
-    </mat-list-item>
+    </button>
 
     <!-- Catalog node children -->
     <mat-list *ngIf="node.children"
       [ngClass]="{'mat-show': open, 'mat-hide': !open}">
-      <branch mat-list-item
+      <branch button
         *ngFor="let node of node.children"
         [node]='node'>
       </branch>
