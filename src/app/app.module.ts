@@ -58,6 +58,7 @@ import {
 } from '@angular/material';
 import { IAppState, rootReducer } from './store/index';
 import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store';
+import { DragulaModule } from 'ng2-dragula';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,7 @@ import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store'
     CatalogComponent, BranchComponent, TimebarComponent, MapLayersComponent
   ],
   imports: [
-    BrowserModule, HttpModule, FormsModule, NgReduxModule, AppRoutingModule,
+    BrowserModule, HttpModule, FormsModule, NgReduxModule, AppRoutingModule, DragulaModule,
     // material animations
     BrowserAnimationsModule, NoopAnimationsModule,
     // material compoment
