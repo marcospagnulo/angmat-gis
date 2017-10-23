@@ -6,7 +6,7 @@ import { AppState } from '../../app.state';
   template: `
   <mat-card id="catalog-container">
     <span class="text title">Catalogo dei dati</span>
-    <mat-list class="catalog-inner-container">
+    <mat-list malihu-scrollbar [scrollbarOptions]="scrollbarOptions" class="catalog-inner-container">
       <branch mat-list-item *ngFor="let node of app.catalog?.catalogNodes" [node]='node'></branch>
       <div *ngIf="app.catalog.catalogNodes === null" class="mat-spinner-container large-padding">
         <mat-spinner></mat-spinner>
@@ -17,5 +17,8 @@ import { AppState } from '../../app.state';
 })
 
 export class CatalogComponent {
+
+  public scrollbarOptions = { axis: 'yx', theme: 'minimal-dark' };
+
   constructor( public app: AppState ) { }
 }

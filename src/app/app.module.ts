@@ -59,6 +59,7 @@ import {
 import { IAppState, rootReducer } from './store/index';
 import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store';
 import { DragulaModule } from 'ng2-dragula';
+import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,7 @@ import { DragulaModule } from 'ng2-dragula';
     CatalogComponent, BranchComponent, TimebarComponent, MapLayersComponent
   ],
   imports: [
-    BrowserModule, HttpModule, FormsModule, NgReduxModule, AppRoutingModule, DragulaModule,
+    BrowserModule, HttpModule, FormsModule, NgReduxModule, AppRoutingModule, DragulaModule, MalihuScrollbarModule.forRoot(),
     // material animations
     BrowserAnimationsModule, NoopAnimationsModule,
     // material compoment
