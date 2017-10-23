@@ -32,6 +32,9 @@ export function CatalogReducer(state: Catalog = DEFAULTS, action: any ): any {
       selectedNodes = state.selectedNodes.filter(({ id }) => id !== action.payload.node.id);
       return Object.assign( {}, state, { selectedNodes: selectedNodes } );
 
+    case 'REORDER_NODES':
+      return Object.assign( {}, state, { selectedNodes: action.payload.nodes } );
+
     default: {
       return state;
     }

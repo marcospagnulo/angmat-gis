@@ -72,4 +72,16 @@ export class CatalogActions {
       payload: { node }
     });
   }
+
+  /**
+   * Risetta i nodi di catalogo selezionati in un nuovo ordine di priorità
+   *
+   * @param nodes - nodi catalogo selzezionati riordinati
+   */
+  reorderSelectedNodes(nodes) {
+    this.ngRedux.dispatch({
+      type: 'REORDER_NODES',
+      payload: { nodes }
+    });
+  }
 }
