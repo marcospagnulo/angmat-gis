@@ -31,8 +31,7 @@ import { CatalogActions } from '../../actions/catalog.actions';
     </button>
 
     <!-- Catalog node children -->
-    <mat-list *ngIf="node.children"
-      [ngClass]="{'mat-show': open, 'mat-hide': !open}">
+    <mat-list *ngIf="node.children && open" [ngClass]="{'mat-show': open, 'mat-hide': !open}">
       <branch button
         *ngFor="let node of node.children"
         [node]='node'>
