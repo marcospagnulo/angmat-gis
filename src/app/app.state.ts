@@ -46,7 +46,7 @@ export class AppState {
     this.ngRedux.select(['catalog', 'selectedNodes']).subscribe((selectedNodes: any[]) => {
       console.log('onSelectNodes', selectedNodes);
       this.selectedNodes = Object.assign([], selectedNodes);
-      this.onSelectNodes.emit(selectedNodes);
+      this.onSelectNodes.emit(this.selectedNodes);
     });
 
     // Timebar subscriber

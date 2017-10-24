@@ -12,8 +12,8 @@ import { DragulaService } from 'ng2-dragula';
   template: `
     <mat-card>
       <span class="text title">Livelli attivi</span>
-      <div [dragula]="'layers'" [dragulaOptions]="dragulaOption" [dragulaModel]="selectedNodes">
-        <div class="map-layers-item" *ngFor="let node of selectedNodes">
+      <div [dragula]="'layers'" [dragulaOptions]="dragulaOption" [dragulaModel]="app.selectedNodes">
+        <div class="map-layers-item" *ngFor="let node of app.selectedNodes">
           <span class="text body" mat-line>{{node.title}}</span>
           <mat-icon class="drag-anchor black">open_with</mat-icon>
         </div>
@@ -35,11 +35,13 @@ export class MapLayersComponent {
   constructor(public app: AppState, private catalogActions: CatalogActions, private dragulaService: DragulaService) {
 
     app.onSelectNodes.subscribe((selectedNodes) => {
+      console.log('onSelectNodes', app.selectedNodes);
       this.selectedNodes = Object.assign([], selectedNodes);
     });
 
     dragulaService.drop.subscribe((value) => {
-      catalogActions.reorderSelectedNodes(this.selectedNodes);
+      console.log('reorderSelectedNodes', app.selectedNodes);
+      catalogActions.reorderSelectedNodes(app.selectedNodes);
     });
 
   }
