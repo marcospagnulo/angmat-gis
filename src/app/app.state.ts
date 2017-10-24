@@ -45,7 +45,7 @@ export class AppState {
     // Catalog node selection subscriber
     this.ngRedux.select(['catalog', 'selectedNodes']).subscribe((selectedNodes: any[]) => {
       console.log('onSelectNodes', selectedNodes);
-      this.selectedNodes = selectedNodes;
+      this.selectedNodes = Object.assign([], selectedNodes);
       this.onSelectNodes.emit(selectedNodes);
     });
 

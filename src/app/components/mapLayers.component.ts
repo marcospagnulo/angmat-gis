@@ -35,12 +35,10 @@ export class MapLayersComponent {
   constructor(public app: AppState, private catalogActions: CatalogActions, private dragulaService: DragulaService) {
 
     app.onSelectNodes.subscribe((selectedNodes) => {
-      console.log(`onSelectNodes - selectedNodes:`, selectedNodes);
-      this.selectedNodes = [].concat(selectedNodes);
+      this.selectedNodes = Object.assign([], selectedNodes);
     });
 
     dragulaService.drop.subscribe((value) => {
-      console.log(`drop - this.selectedNodes:`, this.selectedNodes);
       catalogActions.reorderSelectedNodes(this.selectedNodes);
     });
 
