@@ -28,6 +28,7 @@ export class CatalogActions {
     myHeaders.append('companyId', Config.COMPANY_ID);
     myHeaders.append('password', user.password);
 
+    // Provo a recuperare il catalogo dal local storage
     let catalogNodes, catalogItems;
     try {
       const nodes = localStorage.getItem('catalogNodes');
@@ -38,6 +39,7 @@ export class CatalogActions {
       console.error(e);
     }
 
+    // Se non è presente nel local storage lo scarico
     if (!catalogNodes && !catalogItems) {
 
       this.http.get(
@@ -46,8 +48,10 @@ export class CatalogActions {
       ).subscribe(
         (data) => {
 
+          // Salvo il catalogo scaricato nel local storage
           const catalogResponse = data.json();
           const catalog = catalogResponse.data;
+
           localStorage.setItem('catalogNodes', JSON.stringify(catalog.catalog));
           localStorage.setItem('catalogItems', JSON.stringify(catalog.items));
 
@@ -61,7 +65,8 @@ export class CatalogActions {
     }
   }
 
-   /** Toggle di selezione su un nodo di catalogo
+   /**
+    * Toggle di selezione su un nodo di catalogo
    *
    * @param node - nodo di catalogo
    * @param selected - indica se il nodo è stato selezionato o deselzionato
