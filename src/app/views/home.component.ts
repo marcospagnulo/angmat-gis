@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
     });
 
     app.onTimebarLoad.subscribe((timebar: any) => {
-      if (timebar.selectedTimeslice) {
+      if (timebar.selectedTimeslice && timebar.timeslices.length > 0) {
         this.reloadMap();
       } else {
         this.clearMap();

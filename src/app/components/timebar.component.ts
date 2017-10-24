@@ -53,12 +53,12 @@ export class TimebarComponent {
 
   constructor( public actions: TimebarActions, public app: AppState) {
 
-    this.selectTImeslice(app.selectedTimeslice);
     this.reloadTimebar(app.timebar);
+    this.setSelectedTimesliceIndex(app.selectedTimeslice);
 
     // Imposto la l'indice di selezione alla selezione di un timeslice
     app.onTimesliceSelected.subscribe((selectedTimeslice: number) => {
-      this.selectTImeslice(selectedTimeslice);
+      this.setSelectedTimesliceIndex(selectedTimeslice);
     });
 
     // Costruisco la barra del tempo in funzione dei timeslice caricati
@@ -72,7 +72,7 @@ export class TimebarComponent {
    *
    * @param selectedTimeslice
    */
-  selectTImeslice(selectedTimeslice) {
+  setSelectedTimesliceIndex(selectedTimeslice) {
     if (selectedTimeslice != null) {
       this.timePerDay.forEach(timeslices => {
         const index = timeslices.indexOf(selectedTimeslice);

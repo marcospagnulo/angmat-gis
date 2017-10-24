@@ -53,7 +53,7 @@ export class TimebarActions {
         (response) => {
 
           const timeslices = response.json().data;
-          const timebar = { timeslices: timeslices, selectedTimeslice: timeslices[0].ts, timebarLoading: false };
+          const timebar = { timeslices: timeslices, timebarLoading: false };
 
           this.ngRedux.dispatch({
             type: 'LOAD_TIMEBAR',
