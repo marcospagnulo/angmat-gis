@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
 
   map: L.Map;
 
-  layers: any[] = [];
+  overlayLayers = L.layerGroup([]);
 
   loadTimebarPID: any = null;
 
@@ -49,16 +49,17 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
 
     // Init map
+    const cartographyLayer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', { minZoom: 4 });
+    const baseLayers = {'cartography': cartographyLayer};
+
     this.map = new L.Map('map', {
       zoomControl: false,
       center: new L.LatLng(40, 18),
       zoom: 8,
+      layers: [cartographyLayer, this.overlayLayers]
     });
-    this.reloadMap();
 
-    // Map base layer
-    const urlTemplate = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png';
-    this.map.addLayer(L.tileLayer(urlTemplate, { minZoom: 4 }));
+    this.reloadMap();
   }
 
   /**
@@ -66,10 +67,9 @@ export class HomeComponent implements OnInit {
    */
   clearMap() {
     console.log('clear map');
-    for (const layer of this.layers) {
-      this.map.removeLayer(layer);
+    for (const layer of this.overlayLayers.getLayers()) {
+      this.overlayLayers.removeLayer(layer);
     }
-    this.layers = [];
   }
 
   /**
@@ -113,7 +113,7 @@ export class HomeComponent implements OnInit {
             const layer = L.tileLayer(url, { tms: true });
 
             // Aggiungo il layer alla mappa e salvo il riferimento in un array
-            this.layers.push(layer);
+            this.overlayLayers.addLayer(layer);
             setTimeout(() => {
               this.map.addLayer(layer);
             }, 50);
