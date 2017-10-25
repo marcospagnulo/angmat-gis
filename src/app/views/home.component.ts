@@ -90,10 +90,10 @@ export class HomeComponent implements OnInit {
         }
       })));
     }
+
+    // Carico gli item associati ai nodi di catalogo selezionati sulla mappa
     if (this.app.timebar.timeslices) {
-
       items.map(item => {
-
         if (item.type === 'FORECAST') {
 
           // Recupero le date dal time slice per formattare l'url TMS della previsione

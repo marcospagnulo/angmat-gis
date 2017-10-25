@@ -35,7 +35,6 @@ export class MapLayersComponent {
   constructor(public app: AppState, private catalogActions: CatalogActions, private dragulaService: DragulaService) {
 
     app.onSelectNodes.subscribe((nodes) => {
-      console.log('onSelectNodes', nodes);
       this.selectedNodes = [];
       let i = 0;
       for (const node of nodes) {
@@ -45,7 +44,6 @@ export class MapLayersComponent {
     });
 
     dragulaService.drop.subscribe((value) => {
-      console.log('reorderSelectedNodes', this.selectedNodes);
       catalogActions.reorderSelectedNodes(this.selectedNodes);
     });
 
