@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AppState } from '../../app.state';
 
+/**
+ * Il componente disegna i nodi root di catalogo. I rispettivi figli sono gestiti dal componente branch
+ */
 @Component({
   selector: 'catalog',
   template: `
