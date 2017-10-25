@@ -51,7 +51,14 @@ export class AppState {
 
     // Timebar subscriber
     this.ngRedux.select(['timebar']).subscribe((timebar: Timebar) => {
+
       console.log('onTimebarLoad', timebar);
+
+      // Preseleziono il primo timeslice
+      if (timebar.timeslices.length > 0 && timebar.selectedTimeslice === null) {
+        timebar.selectedTimeslice = timebar.timeslices[0].ts;
+      }
+
       this.timebar = timebar;
       this.onTimebarLoad.emit(timebar);
     });
