@@ -10,12 +10,28 @@ import { DragulaService } from 'ng2-dragula';
   selector: 'map-layers',
   styleUrls: ['../../../node_modules/dragula/dist/dragula.css'],
   template: `
-    <mat-card>
+    <mat-card *ngIf="selectedNodes.length > 0">
+
+      <!-- Card title -->
       <span class="text title">Livelli attivi</span>
-      <div [dragula]="'layers'" [dragulaOptions]="dragulaOption" [dragulaModel]="this.selectedNodes">
-        <div class="map-layers-item" *ngFor="let node of this.selectedNodes">
-          <span class="text body" mat-line>{{node.title}}</span>
-          <mat-icon class="drag-anchor black">open_with</mat-icon>
+
+      <div [dragula]="'layers'" [dragulaOptions]="dragulaOption" [dragulaModel]="selectedNodes">
+
+      <div class="map-layers-item" *ngFor="let node of selectedNodes">
+          <!-- Title -->
+          <span class="map-layers-item-label text body" mat-line>{{node.title}}</span>
+          <!-- Settings -->
+          <button mat-icon-button>
+            <mat-icon class="black">build</mat-icon>
+          </button>
+          <!-- Delete -->
+          <button mat-icon-button>
+            <mat-icon class="black">delete</mat-icon>
+          </button>
+          <!-- Drag -->
+          <div class="mat-icon-button">
+            <mat-icon class="drag-anchor black">open_with</mat-icon>
+          </div>
         </div>
       </div>
     </mat-card>
