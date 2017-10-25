@@ -21,7 +21,7 @@ import { AppState } from '../../app.state';
 
 export class CatalogComponent {
 
-  public scrollbarOptions = { axis: 'yx', theme: 'minimal-dark' };
+  public scrollbarOptions = { axis: 'y', theme: 'minimal-dark' };
 
   constructor( public app: AppState ) { }
 }
