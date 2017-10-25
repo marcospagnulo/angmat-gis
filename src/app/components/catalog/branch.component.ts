@@ -1,8 +1,11 @@
 import { AppState } from '../../app.state';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { IAppState } from '../../store/index';
 import { CatalogActions } from '../../actions/catalog.actions';
 
+/**
+ * Il componente disegna un nodo di catalogo e ne permette la selezione
+ */
 @Component({
   selector: 'branch',
   template: `
@@ -31,12 +34,14 @@ import { CatalogActions } from '../../actions/catalog.actions';
     </button>
 
     <!-- Catalog node children -->
-    <mat-list *ngIf="node.children && open" [ngClass]="{'mat-show': open, 'mat-hide': !open}">
-      <branch button
-        *ngFor="let node of node.children"
-        [node]='node'>
-      </branch>
-    </mat-list>
+    <div #children class="mat-hide">
+      <mat-list *ngIf="node.children && open">
+        <branch button
+          *ngFor="let node of node.children"
+          [node]='node'>
+        </branch>
+      </mat-list>
+    </div>
 `
 })
 
@@ -48,12 +53,19 @@ export class BranchComponent implements OnInit {
 
   selected: boolean;
 
+  @ViewChild('children') children;
+
   constructor( public app: AppState, public actions: CatalogActions) { }
 
   ngOnInit() {
     this.selected = this.isSelected(this.node.id);
   }
 
+  /**
+   * Setta lo stato selezionato ad un nodo di catalogo
+   *
+   * @param id - identificativo nodo catalogo
+   */
   isSelected(id) {
     const res = this.app.selectedNodes.find( node => node.id === id);
     return this.app.selectedNodes.find( node => node.id === id) !== undefined;
@@ -64,5 +76,6 @@ export class BranchComponent implements OnInit {
    */
   toggleNode() {
     this.open = !this.open;
+    this.children.nativeElement.className = this.open ? 'mat-show' : 'mat-hide';
   }
 }
