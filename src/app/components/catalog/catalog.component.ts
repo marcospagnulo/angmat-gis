@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AppState } from '../../app.state';
 
+/**
+ * Il componente disegna i nodi root di catalogo. I rispettivi figli sono gestiti dal componente branch
+ */
 @Component({
   selector: 'catalog',
   template: `
@@ -18,7 +21,7 @@ import { AppState } from '../../app.state';
 
 export class CatalogComponent {
 
-  public scrollbarOptions = { axis: 'yx', theme: 'minimal-dark' };
+  public scrollbarOptions = { axis: 'y', theme: 'minimal-dark' };
 
   constructor( public app: AppState ) { }
 }

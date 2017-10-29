@@ -1,6 +1,7 @@
 map-layers{
   position: absolute;
   left: 16px;
+  width: 20%;
   bottom: 16px;
   z-index: 999;
 }
@@ -10,14 +11,13 @@ map-layers map-list-item{
 }
 
 .map-layers-item{
-  padding: 8px 4px;
-  height: 40px;
+  padding: 8px 0px 8px 8px;
   background-color: #FFF;
 }
 
-.map-layers-item mat-icon{
-  float: right;
-  margin-left: 16px;
+.map-layers-item-label {
+  display: block;
+  width: 60%;
 }
 
 .map-layers-item mat-icon, .map-layers-item span{
