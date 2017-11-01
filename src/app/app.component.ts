@@ -11,6 +11,7 @@ import { IAppState } from './store/index';
   `
 
     <mat-sidenav-container>
+
       <!-- Toolbar -->
       <mat-toolbar color="primary" class="mat-elevation-z6 large-padding" *authorized>
         <button mat-icon-button (click)="sidenav.toggle()">

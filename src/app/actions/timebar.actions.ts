@@ -30,7 +30,7 @@ export class TimebarActions {
    *
    * @param nodes - nodi di catalogo selezionati
    */
-  loadTimebar(nodes) {
+  loadTimebar(nodes, selectedTimeslice) {
 
     if (nodes && nodes.length > 0) {
 
@@ -51,10 +51,7 @@ export class TimebarActions {
       url = url + nodes.map(item => item.id).join(',');
       this.http.get(url, options).subscribe(
         (response) => {
-
-          const timeslices = response.json().data;
-          const timebar = { timeslices: timeslices, timebarLoading: false };
-
+          const timebar = { timeslices: response.json().data, selectedTimeslice: selectedTimeslice, timebarLoading: false };
           this.ngRedux.dispatch({
             type: 'LOAD_TIMEBAR',
             payload: timebar

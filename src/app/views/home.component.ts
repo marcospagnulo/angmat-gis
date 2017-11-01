@@ -28,19 +28,24 @@ export class HomeComponent implements OnInit {
 
   loadTimebarPID: any = null;
 
-  constructor(private ngRedux: NgRedux<IAppState>, public catalogActions: CatalogActions,
-    public timebarActions: TimebarActions, public util: Util, public app: AppState) {
+  constructor(public catalogActions: CatalogActions, public timebarActions: TimebarActions, public util: Util, public app: AppState) {
 
     // la selezione di nodi di catalogo prevede il ricaricamento della timebar
     app.onSelectNodes.subscribe((selectedNodes: any[]) => {
       clearTimeout(this.loadTimebarPID);
-      this.loadTimebarPID = setTimeout(() => this.timebarActions.loadTimebar(selectedNodes), 1000);
+      this.loadTimebarPID = setTimeout(() => this.timebarActions.loadTimebar(selectedNodes, app.timebar.selectedTimeslice), 1000);
     });
 
     app.onTimebarLoad.subscribe((timebar: any) => {
-      if (timebar.selectedTimeslice && timebar.timeslices.length > 0) {
+
+      if (!timebar.selectedTimeslice && timebar.timeslices.length > 0) {
+        // Primo caricamento su mappa, non ha un timeslice selezionato
+        timebarActions.selectTimeslice(timebar.timeslices[0].ts);
+      } else if (timebar.timeslices.length > 0) {
+        // C'è un timeslice selezionato, procedo alla visualizzazione dei layer
         this.reloadMap();
       } else {
+        // cancello i layer dalla mappa
         this.clearMap();
       }
     });
