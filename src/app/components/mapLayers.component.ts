@@ -19,7 +19,7 @@ import { DragulaService } from 'ng2-dragula';
 
       <div class="map-layers-item" *ngFor="let node of selectedNodes">
           <!-- Title -->
-          <span class="map-layers-item-label text body" mat-line>{{node.title}}</span>
+          <span class="map-layers-item-label text body truncate" mat-line>{{node.title}}</span>
           <!-- Settings -->
           <button mat-icon-button>
             <mat-icon class="black">build</mat-icon>
@@ -52,10 +52,10 @@ export class MapLayersComponent {
 
     app.onSelectNodes.subscribe((nodes) => {
       this.selectedNodes = [];
-      let i = 0;
+      let i = nodes.length - 1;
       for (const node of nodes) {
         this.selectedNodes[i] = node;
-        i++;
+        i--;
       }
     });
 

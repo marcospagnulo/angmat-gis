@@ -10,7 +10,7 @@ import { CatalogActions } from '../../actions/catalog.actions';
   selector: 'branch',
   template: `
 
-    <button mat-list-item mat-button (click)="toggleNode()">
+    <button class="truncate" mat-list-item mat-button (click)="toggleNode()">
 
       <!-- Catalog node -->
       <mat-icon mat-list-icon
