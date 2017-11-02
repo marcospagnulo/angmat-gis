@@ -69,9 +69,9 @@ export class CatalogActions {
     * Toggle di selezione su un nodo di catalogo
    *
    * @param node - nodo di catalogo
-   * @param selected - indica se il nodo è stato selezionato o deselzionato
+   * @param selected - indica se il nodo è nello stato selezionato o deselzionato
    */
-  selectLeaf(node, selected) {
+  toggleNode(node, selected) {
     this.ngRedux.dispatch({
       type: selected ? 'REMOVE_SELECT_NODE' : 'ADD_SELECT_NODE',
       payload: { node }

@@ -50,6 +50,13 @@ mat-toolbar{
 // Card
 mat-card {
   padding: 16px !important;
+  transition: all 0.5s ease-in;
+}
+
+mat-card .card-actions{
+  position: absolute;
+  right: 8px;
+  top: 8px;
 }
 
 // Sidenav

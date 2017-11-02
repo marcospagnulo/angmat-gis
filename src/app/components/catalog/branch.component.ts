@@ -26,7 +26,7 @@ import { CatalogActions } from '../../actions/catalog.actions';
       <!-- Catalog leaf -->
       <mat-checkbox class="text body"
         mat-list-icon
-        (click)="actions.selectLeaf(node, selected)"
+        (click)="actions.toggleNode(node, selected)"
         *ngIf="node.leaf"
         [(ngModel)]="selected">
         {{node.title}}

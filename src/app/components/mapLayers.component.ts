@@ -25,7 +25,7 @@ import { DragulaService } from 'ng2-dragula';
             <mat-icon class="black">build</mat-icon>
           </button>
           <!-- Delete -->
-          <button mat-icon-button>
+          <button mat-icon-button (click)="catalogActions.toggleNode(node, true)">
             <mat-icon class="black">delete</mat-icon>
           </button>
           <!-- Drag -->
@@ -48,7 +48,7 @@ export class MapLayersComponent {
     }
   };
 
-  constructor(public app: AppState, private catalogActions: CatalogActions, private dragulaService: DragulaService) {
+  constructor(public app: AppState, public catalogActions: CatalogActions, private dragulaService: DragulaService) {
 
     app.onSelectNodes.subscribe((nodes) => {
       this.selectedNodes = [];

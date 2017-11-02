@@ -35,3 +35,48 @@
 .mCustomScrollBox{
   margin-right: 16px;
 }
+
+/* Stili e animazioni per i passaggi stato minimizzato/massimizato delle card sulla mappa */
+.maximized {
+  float: right;
+  width: 100%;
+  max-height: 999px;
+  overflow: hidden;
+  transition: width 0.5s ease-in,
+    max-height 1s ease-in,
+    border-radius .4s ease-in
+    !important;
+}
+
+.maximized .minimize-button{
+  display: block;
+}
+
+.maximized .maximize-button{
+  display: none;
+}
+
+.minimized {
+  border-radius: 50% !important;
+  width: 56px;
+  max-height: 56px;
+  overflow: hidden;
+  float: right;
+  padding: 0 !important;
+  transition: width 0.5s ease-in,
+    max-height 0.4s ease-in,
+    border-radius 0.7s ease-in
+    !important;
+}
+
+.minimized .minimize-button{
+  display: none;
+}
+
+.minimized .maximize-button{
+  display: block;
+}
+
+.minimized .inner-container{
+  visibility: hidden;
+}

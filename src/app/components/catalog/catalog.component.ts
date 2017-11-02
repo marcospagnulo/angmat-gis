@@ -7,21 +7,40 @@ import { AppState } from '../../app.state';
 @Component({
   selector: 'catalog',
   template: `
-  <mat-card id="catalog-container">
-    <span class="text title">Catalogo dei dati</span>
-    <mat-list malihu-scrollbar [scrollbarOptions]="scrollbarOptions" class="catalog-inner-container">
-      <branch mat-list-item *ngFor="let node of app.catalog?.catalogNodes" [node]='node'></branch>
-      <div *ngIf="app.catalog.catalogNodes === null" class="mat-spinner-container large-padding">
-        <mat-spinner></mat-spinner>
-      </div>
-    </mat-list>
+  <mat-card id="catalog-container" [ngClass]="{'minimized': state === 'minimized','maximized': state === 'maximized'}">
+    <div class="card-actions">
+      <button class="minimize-button" mat-icon-button (click)="toggleSize()">
+        <span class="fa text fa-minus"></span>
+      </button>
+      <button class="maximize-button" mat-icon-button (click)="toggleSize()">
+        <mat-icon mat-list-icon class="black">folder</mat-icon>
+      </button>
+    </div>
+    <div class="inner-container">
+      <span class="text title">Catalogo dei dati</span>
+      <mat-list malihu-scrollbar [scrollbarOptions]="scrollbarOptions" class="catalog-inner-container">
+        <branch mat-list-item *ngFor="let node of app.catalog?.catalogNodes" [node]='node'></branch>
+        <div *ngIf="app.catalog.catalogNodes === null" class="mat-spinner-container large-padding">
+          <mat-spinner></mat-spinner>
+        </div>
+      </mat-list>
+    </div>
   </mat-card>
 `
 })
 
 export class CatalogComponent {
 
+  state = 'maximized';
+
   public scrollbarOptions = { axis: 'y', theme: 'minimal-dark' };
 
   constructor( public app: AppState ) { }
+
+  /**
+   * Minimizza la card
+   */
+  toggleSize() {
+    this.state = this.state === 'minimized' ? 'maximized' : 'minimized';
+  }
 }
