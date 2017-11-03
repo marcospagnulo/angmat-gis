@@ -7,8 +7,9 @@ import { AppState } from '../../app.state';
 @Component({
   selector: 'catalog',
   template: `
-  <mat-card id="catalog-container" [ngClass]="{'minimized': state === 'minimized','maximized': state === 'maximized'}">
-    <div class="card-actions">
+  <mat-card id="catalog-container" class="top right"
+    [ngClass]="{'minimized': state === 'minimized','maximized': state === 'maximized'}">
+    <div class="card-toggle right">
       <button class="minimize-button" mat-icon-button (click)="toggleSize()">
         <span class="fa text fa-minus"></span>
       </button>
@@ -38,7 +39,7 @@ export class CatalogComponent {
   constructor( public app: AppState ) { }
 
   /**
-   * Minimizza la card
+   * Effettua il toggle sullo stato minimizzato/massimizzato  della card
    */
   toggleSize() {
     this.state = this.state === 'minimized' ? 'maximized' : 'minimized';

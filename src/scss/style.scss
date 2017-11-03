@@ -37,8 +37,23 @@
 }
 
 /* Stili e animazioni per i passaggi stato minimizzato/massimizato delle card sulla mappa */
+.card-toggle{
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 1;
+}
+
+.card-toggle{
+  width: 40px;
+  height: 40px;
+}
+
+.card-toggle button{
+  position: absolute;
+}
+
 .maximized {
-  float: right;
   width: 100%;
   max-height: 999px;
   overflow: hidden;
@@ -48,12 +63,22 @@
     !important;
 }
 
+.right.maximized, .right.minimized{
+  float: right;
+}
+
+.left.maximized, .left.minimized{
+  float: left;
+}
+
 .maximized .minimize-button{
-  display: block;
+  transform: scale(1);
+  transition: transform 0.25s ease-in;
 }
 
 .maximized .maximize-button{
-  display: none;
+  transform: scale(0);
+  transition: transform 0.25s ease-in;
 }
 
 .minimized {
@@ -61,22 +86,21 @@
   width: 56px;
   max-height: 56px;
   overflow: hidden;
-  float: right;
   padding: 0 !important;
-  transition: width 0.5s ease-in,
-    max-height 0.4s ease-in,
-    border-radius 0.7s ease-in
-    !important;
+  transition: padding 0.4s ease-out, width 0.4s ease-out, max-height 0.3s ease-out, border-radius 0.52s ease-out !important;
 }
 
 .minimized .minimize-button{
-  display: none;
+  transform: scale(0);
+  transition: transform 0.25s ease-out;
 }
 
 .minimized .maximize-button{
-  display: block;
+  transform: scale(1);
+  transition: transform 0.25s ease-in;
 }
 
 .minimized .inner-container{
-  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.5 ease-in;
 }

@@ -10,27 +10,40 @@ import { DragulaService } from 'ng2-dragula';
   selector: 'map-layers',
   styleUrls: ['../../../node_modules/dragula/dist/dragula.css'],
   template: `
-    <mat-card *ngIf="selectedNodes.length > 0">
+    <mat-card *ngIf="selectedNodes.length > 0" class="bottom left"
+      [ngClass]="{'minimized': state === 'minimized','maximized': state === 'maximized'}">
 
-      <!-- Card title -->
-      <span class="text title">Livelli attivi</span>
+      <!-- Card toggle -->
+      <div class="card-toggle right">
+        <button class="minimize-button" mat-icon-button (click)="toggleSize()">
+          <span class="fa text fa-minus"></span>
+        </button>
+        <button class="maximize-button" mat-icon-button (click)="toggleSize()">
+          <mat-icon mat-list-icon class="black">layers</mat-icon>
+        </button>
+      </div>
 
-      <div [dragula]="'layers'" [dragulaOptions]="dragulaOption" [dragulaModel]="selectedNodes">
+      <div class="inner-container">
 
-      <div class="map-layers-item" *ngFor="let node of selectedNodes">
-          <!-- Title -->
-          <span class="map-layers-item-label text body truncate" mat-line>{{node.title}}</span>
-          <!-- Settings -->
-          <button mat-icon-button>
-            <mat-icon class="black">build</mat-icon>
-          </button>
-          <!-- Delete -->
-          <button mat-icon-button (click)="catalogActions.toggleNode(node, true)">
-            <mat-icon class="black">delete</mat-icon>
-          </button>
-          <!-- Drag -->
-          <div class="mat-icon-button">
-            <mat-icon class="drag-anchor black">open_with</mat-icon>
+        <!-- Card title -->
+        <span class="text title">Livelli attivi</span>
+
+        <div [dragula]="'layers'" [dragulaOptions]="dragulaOption" [dragulaModel]="selectedNodes">
+          <div class="map-layers-item" *ngFor="let node of selectedNodes">
+            <!-- Title -->
+            <span class="map-layers-item-label text body truncate" mat-line>{{node.title}}</span>
+            <!-- Settings -->
+            <button mat-icon-button>
+              <mat-icon class="black">build</mat-icon>
+            </button>
+            <!-- Delete -->
+            <button mat-icon-button (click)="catalogActions.toggleNode(node, true)">
+              <mat-icon class="black">delete</mat-icon>
+            </button>
+            <!-- Drag -->
+            <div class="mat-icon-button">
+              <mat-icon class="drag-anchor black">open_with</mat-icon>
+            </div>
           </div>
         </div>
       </div>
@@ -39,6 +52,8 @@ import { DragulaService } from 'ng2-dragula';
 })
 
 export class MapLayersComponent {
+
+  state = 'maximized';
 
   selectedNodes: any[] = [];
 
@@ -63,6 +78,13 @@ export class MapLayersComponent {
       catalogActions.reorderSelectedNodes(this.selectedNodes);
     });
 
+  }
+
+  /**
+   * Effettua il toggle sullo stato minimizzato/massimizzato  della card
+   */
+  toggleSize() {
+    this.state = this.state === 'minimized' ? 'maximized' : 'minimized';
   }
 
 }
