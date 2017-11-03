@@ -42,15 +42,19 @@ mat-toolbar{
   position: absolute;
   z-index: 999;
   top: 0;
-  width: auto !important;
-  margin: 16px !important;
   padding: 0px 16px 0px 8px !important;
+  width: 100%;
+  transition: width .25s ease, margin .25s ease;
+}
+
+mat-toolbar.floating{
+  width: 220px;
+  margin: 16px !important;
 }
 
 // Card
 mat-card {
   padding: 16px !important;
-  transition: all 0.5s ease-in;
 }
 
 // Sidenav

@@ -13,7 +13,8 @@ import { IAppState } from './store/index';
     <mat-sidenav-container>
 
       <!-- Toolbar -->
-      <mat-toolbar color="primary" class="mat-elevation-z6 large-padding" *authorized>
+      <mat-toolbar color="primary" class="mat-elevation-z6 large-padding" *authorized
+        [ngClass]="{'floating': (router.url === '/home' || router.url === '/')}" >
         <button mat-icon-button (click)="sidenav.toggle()">
           <mat-icon>menu</mat-icon>
         </button>
@@ -52,7 +53,7 @@ export class AppComponent {
   @ViewChild('sidenav') sidenav;
 
   constructor( private ngRedux: NgRedux<IAppState>, public actions: AuthActions, private router: Router, private route: ActivatedRoute ) {
-
+    console.log(this.router.url);
   }
 
   /**
@@ -61,6 +62,7 @@ export class AppComponent {
    * @param page
    */
   goToPage(page) {
+    console.log(this.router.url);
     this.router.navigateByUrl(page);
     this.sidenav.toggle();
   }
