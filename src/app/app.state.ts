@@ -30,11 +30,12 @@ export class AppState {
 
   constructor (private ngRedux: NgRedux<IAppState>, public catalogActions: CatalogActions) {
 
-    catalogActions.loadCatalog();
-
     // User subscriber
     this.ngRedux.select(['auth', 'user']).subscribe((user: User) => {
       this.user = user;
+      if (user !== null) {
+        catalogActions.loadCatalog(user);
+      }
     });
 
     // Catalog subscriber

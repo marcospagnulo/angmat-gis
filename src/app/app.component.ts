@@ -25,7 +25,7 @@ import { IAppState } from './store/index';
       <!-- Sidenav -->
       <mat-sidenav class="mat-elevation-z20" #sidenav mode="over" opened="false" *authorized>
         <div class="sidenav-header">
-          <span class="text title">AngMat Gis</span>
+          <span class="text title white bold">AngMat Gis</span>
           <div class="user-info">
             <span class="text subhead bold white">{{app.user.fullName}}</span>
             <span class="text body white">{{app.user.email}}</span>

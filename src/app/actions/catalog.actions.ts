@@ -20,9 +20,8 @@ export class CatalogActions {
   /**
    * Carica il catalogo dei dati
    */
-  loadCatalog() {
+  loadCatalog(user) {
 
-    const user = JSON.parse(localStorage.getItem('user'));
     const myHeaders = new Headers();
     myHeaders.append('userId', user.id);
     myHeaders.append('companyId', Config.COMPANY_ID);
