@@ -19,25 +19,28 @@ import { IAppState } from './store/index';
         <button mat-icon-button (click)="sidenav.toggle()">
           <mat-icon>menu</mat-icon>
         </button>
-        <h2>Demo Application</h2>
+        <h2>AngMat Gis</h2>
       </mat-toolbar>
 
       <!-- Sidenav -->
       <mat-sidenav class="mat-elevation-z20" #sidenav mode="over" opened="false" *authorized>
         <div class="sidenav-header">
+          <span class="text title">AngMat Gis</span>
           <div class="user-info">
             <span class="text subhead bold white">{{app.user.fullName}}</span>
             <span class="text body white">{{app.user.email}}</span>
           </div>
         </div>
         <mat-list class="small-padding">
-          <button mat-button (click)="goToPage('/home')" mat-list-item>
+          <button mat-button (click)="goToPage('/home')" mat-list-item
+          [ngClass]="{'active': (router.url === '/home' || router.url === '/')}">
             <mat-icon mat-list-icon>home</mat-icon>
             <span class="text subhead" mat-line>Home</span>
           </button>
-          <button mat-button (click)="goToPage('/workspace')" mat-list-item>
+          <button mat-button (click)="goToPage('/workspace')" mat-list-item
+          [ngClass]="{'active': (router.url === '/workspace')}">
             <mat-icon mat-list-icon>map</mat-icon>
-            <span class="text subhead" mat-line>Redux</span>
+            <span class="text subhead" mat-line>Workspace</span>
           </button>
           <mat-divider></mat-divider>
           <button mat-button (click)='logout()' mat-list-item>

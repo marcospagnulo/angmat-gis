@@ -93,6 +93,14 @@ mat-sidenav button{
   padding: 8px 0 !important;
 }
 
+mat-sidenav button.active{
+  background-color: lightgray;
+}
+
+mat-sidenav button.active .text{
+  font-weight: bold;
+}
+
 mat-sidenav button .mat-button-wrapper{
   width: 100%;
   display: block;
