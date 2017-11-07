@@ -53,11 +53,19 @@
   position: absolute;
 }
 
+mat-card.minimized{
+  background-color: #3f51b5;
+}
+
+.maximize-button{
+  color:rgba(255, 255, 255, 0.87) !important;
+}
+
 .maximized {
   width: 100%;
   max-height: 999px;
   overflow: hidden;
-  transition: padding 0.4s ease-out, width 0.3s ease-out, max-height 0.3s ease-out, border-radius 0.4s ease-out !important;
+  transition: padding 0.6s ease-out, width 0.3s ease-out, max-height 0.3s ease-out, border-radius 0.4s ease-out, background-color 0.4s ease-in !important;
 }
 
 .right.maximized, .right.minimized{
@@ -89,7 +97,7 @@
   max-height: 56px;
   overflow: hidden;
   padding: 0 !important;
-  transition: padding 0.4s ease-in, width 0.3s ease-in, max-height 0.3s ease-in, border-radius 0.4s ease-in !important;
+  transition: padding 0.6s ease-in, width 0.3s ease-in, max-height 0.3s ease-in, border-radius 0.4s ease-in, background-color 0.4s ease-in !important;
 }
 
 .minimized .minimize-button{

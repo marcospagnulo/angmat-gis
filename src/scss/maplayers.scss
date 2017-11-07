@@ -11,8 +11,11 @@ map-layers map-list-item{
 
 .map-layers-item{
   padding: 8px 0px 8px 8px;
-  background-color: #FFF;
   min-width: 300px;
+}
+
+.map-layers-item.gu-mirror{
+  background-color: #FFF;
 }
 
 .map-layers-item-label {

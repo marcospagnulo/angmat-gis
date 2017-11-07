@@ -19,7 +19,7 @@ import { DragulaService } from 'ng2-dragula';
           <span class="fa text fa-minus"></span>
         </button>
         <button class="maximize-button" mat-icon-button (click)="toggleSize()">
-          <mat-icon mat-list-icon class="black">layers</mat-icon>
+          <mat-icon>layers</mat-icon>
         </button>
       </div>
 

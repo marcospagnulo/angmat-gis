@@ -14,7 +14,7 @@ import { AppState } from '../../app.state';
         <span class="fa text fa-minus"></span>
       </button>
       <button class="maximize-button" mat-icon-button (click)="toggleSize()">
-        <mat-icon mat-list-icon class="black">folder</mat-icon>
+        <mat-icon>folder</mat-icon>
       </button>
     </div>
     <div class="inner-container">
