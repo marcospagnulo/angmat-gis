@@ -1,3 +1,4 @@
+import { AppState } from './app.state';
 import { AuthActions } from './actions/auth.actions';
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -23,6 +24,12 @@ import { IAppState } from './store/index';
 
       <!-- Sidenav -->
       <mat-sidenav class="mat-elevation-z20" #sidenav mode="over" opened="false" *authorized>
+        <div class="sidenav-header">
+          <div class="user-info">
+            <span class="text subhead bold white">{{app.user.fullName}}</span>
+            <span class="text body white">{{app.user.email}}</span>
+          </div>
+        </div>
         <mat-list class="small-padding">
           <button mat-button (click)="goToPage('/home')" mat-list-item>
             <mat-icon mat-list-icon>home</mat-icon>
@@ -52,8 +59,9 @@ export class AppComponent {
 
   @ViewChild('sidenav') sidenav;
 
-  constructor( private ngRedux: NgRedux<IAppState>, public actions: AuthActions, private router: Router, private route: ActivatedRoute ) {
-    console.log(this.router.url);
+  constructor( private ngRedux: NgRedux<IAppState>, public actions: AuthActions, private router: Router, private route: ActivatedRoute,
+    public app: AppState ) {
+
   }
 
   /**

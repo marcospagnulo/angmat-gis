@@ -9,6 +9,10 @@ html, body, material-app, mat-sidenav-container, .app-content {
   color:rgba(0, 0, 0, 0.54) !important;
 }
 
+.white{
+  color:rgba(255, 255, 255, 0.87) !important;
+}
+
 .text.display{
   font-size: 34px !important;
 }
@@ -59,10 +63,26 @@ mat-card {
 
 // Sidenav
 mat-sidenav{
-  width:200px;
-  padding: 8px;
+  width: 350px;
 }
 
+mat-sidenav .sidenav-header{
+  background-color: #3f51b5;
+  padding: 16px;
+  position: relative;
+  min-height: 200px;
+}
+
+mat-sidenav .sidenav-header .user-info{
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+}
+
+mat-sidenav .sidenav-header .user-info span{
+  display: block;
+  padding: 8px;
+}
 
 mat-sidenav, mat-sidenav-container{
   background: #F1F1F1 !important;

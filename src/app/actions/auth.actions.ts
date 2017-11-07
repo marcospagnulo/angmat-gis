@@ -44,6 +44,7 @@ export class AuthActions {
 
         // Recupero il json utente
         const user = data.json();
+        user.email = username;
         user.password = password;
         localStorage.setItem('user', JSON.stringify(user));
 
