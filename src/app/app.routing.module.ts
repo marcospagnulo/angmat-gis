@@ -1,14 +1,14 @@
 import { AuthGuard } from './guard/auth.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ReduxComponent } from './views/redux.component';
+import { WorkspaceComponent } from './views/workspace.component';
 import { HomeComponent } from './views/home.component';
 import { LoginComponent } from './views/login.component';
 @NgModule({
   imports: [
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent },
-      { path: 'redux', component: ReduxComponent, canActivate: [AuthGuard]},
+      { path: 'workspace', component: WorkspaceComponent, canActivate: [AuthGuard]},
       { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
       { path: '', component: HomeComponent, canActivate: [AuthGuard]},
       { path: '**', component: HomeComponent, canActivate: [AuthGuard] }

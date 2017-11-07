@@ -3,18 +3,12 @@ import { Component } from '@angular/core';
 import { select, NgRedux } from '@angular-redux/store';
 import { IAppState } from '../store/index';
 import { Device } from '../model/device';
-import { DevicesActions } from '../actions/devices.actions';
+import { WorkspaceActions } from '../actions/workspace.actions';
 
 @Component({
-  selector: 'redux',
+  selector: 'workspace',
   template: `
   <div class="large-padding">
-    <mat-card>
-      <h3>{{(config | async).color}}</h3>
-      <button mat-raised-button (click)="changeColor('green')">Change Color</button>
-    </mat-card>
-
-    <div class="small-padding"></div>
 
     <mat-card>
 
@@ -95,7 +89,7 @@ import { DevicesActions } from '../actions/devices.actions';
   `
 })
 
-export class ReduxComponent {
+export class WorkspaceComponent {
 
     @select('config') config;   // use angular-redux select decorator
 
@@ -103,7 +97,7 @@ export class ReduxComponent {
 
     device: Device;
 
-    constructor( private ngRedux: NgRedux<IAppState>, public actions: DevicesActions ) {
+    constructor( private ngRedux: NgRedux<IAppState>, public actions: WorkspaceActions ) {
 
       actions.reset();
       actions.getAll();

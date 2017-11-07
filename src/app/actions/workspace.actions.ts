@@ -5,7 +5,7 @@ import { Http } from '@angular/http';
 import { Device } from '../model/device';
 
 @Injectable()
-export class DevicesActions {
+export class WorkspaceActions {
 
   static DEVICES_GET = 'DEVICES_GET';
 
@@ -33,7 +33,7 @@ export class DevicesActions {
       .subscribe((res) => {
         const list = res.json();
         this.ngRedux.dispatch({
-          type: DevicesActions.DEVICES_GET,
+          type: WorkspaceActions.DEVICES_GET,
           payload: { list }
         });
       });
@@ -60,7 +60,7 @@ export class DevicesActions {
     this.http.delete(`${this.API_URL}/devices/${id}`)
       .subscribe((res) => {
         this.ngRedux.dispatch({
-          type: DevicesActions.DEVICES_DELETE,
+          type: WorkspaceActions.DEVICES_DELETE,
           payload: { id }
         });
         this.reset();
@@ -71,7 +71,7 @@ export class DevicesActions {
     this.http.patch(`${this.API_URL}/devices/${id}`, device)
       .subscribe((res) => {
         this.ngRedux.dispatch({
-          type: DevicesActions.DEVICES_UPDATE,
+          type: WorkspaceActions.DEVICES_UPDATE,
           payload: { device: res.json() }
         });
       });
@@ -81,7 +81,7 @@ export class DevicesActions {
     this.http.post(`${this.API_URL}/devices/`, device)
       .subscribe((res) => {
         this.ngRedux.dispatch({
-          type: DevicesActions.DEVICES_ADD,
+          type: WorkspaceActions.DEVICES_ADD,
           payload: { device: res.json() }
         });
         this.setActive(res.json().id);  // select last added device
@@ -93,7 +93,7 @@ export class DevicesActions {
    */
   reset() {
     this.ngRedux.dispatch({
-      type: DevicesActions.DEVICES_RESET,
+      type: WorkspaceActions.DEVICES_RESET,
       payload: null
     });
   }
@@ -105,7 +105,7 @@ export class DevicesActions {
    */
   setActive(id: number): void {
     this.ngRedux.dispatch({
-      type: DevicesActions.DEVICES_SET_ACTIVE,
+      type: WorkspaceActions.DEVICES_SET_ACTIVE,
       payload: { id }
     });
   }

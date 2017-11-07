@@ -2,7 +2,7 @@ import { Timebar, TimebarReducer } from './timebar.reducer';
 import { combineReducers } from 'redux';
 import { ConfigReducer, Config } from './config.reducer';
 import { CatalogReducer, Catalog } from './catalog.reducer';
-import { DevicesReducer } from './devices.reducer';
+import { WorkspaceReducer } from './workspace.reducer';
 import { AuthReducer, Auth } from './auth.reducer';
 import { Device } from '../model/device';
 
@@ -16,7 +16,7 @@ export class IAppState {
 
 export const rootReducer = combineReducers<IAppState>({
   config: ConfigReducer,
-  devices: DevicesReducer,
+  workspace: WorkspaceReducer,
   auth: AuthReducer,
   catalog: CatalogReducer,
   timebar: TimebarReducer

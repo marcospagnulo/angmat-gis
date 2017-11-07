@@ -20,10 +20,7 @@
   text-overflow: ellipsis;
 }
 
-#map {
-  height: 100%;
-}
-
+/* Show hide toggle animation for lists*/
 .mat-show{
   max-height: 999px;
   transition: all 0.5s ease-in;
@@ -34,10 +31,6 @@
   transition: all 0.25s ease-out;
   max-height: 0;
   overflow: hidden;
-}
-
-.mCustomScrollBox{
-  margin-right: 16px;
 }
 
 /* Stili e animazioni per i passaggi stato minimizzato/massimizato delle card sulla mappa */
@@ -117,4 +110,16 @@ mat-card.minimized{
 .minimized .inner-container{
   opacity: 0;
   transition: opacity 0.2s ease-in;
+}
+
+.app-content.below-toolbar{
+  margin-top: 64px;
+}
+
+#map {
+  height: 100%;
+}
+
+.mCustomScrollBox{
+  margin-right: 16px;
 }

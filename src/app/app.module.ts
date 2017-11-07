@@ -9,9 +9,9 @@ import { TimebarActions } from './actions/timebar.actions';
 import { AuthorizedDirective } from './guard/authorized.directive';
 import { DialogOverviewExampleDialog, LoginComponent, SnackbarComponent } from './views/login.component';
 import { AuthGuard } from './guard/auth.guard';
-import { DevicesActions } from './actions/devices.actions';
+import { WorkspaceActions } from './actions/workspace.actions';
 import { AppRoutingModule } from './app.routing.module';
-import { ReduxComponent } from './views/redux.component';
+import { WorkspaceComponent } from './views/workspace.component';
 import { HomeComponent } from './views/home.component';
 import { AppComponent } from './app.component';
 import { CatalogComponent } from './components/catalog/catalog.component';
@@ -64,7 +64,7 @@ import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
 @NgModule({
   declarations: [
     MapKeysPipe, FormatHourPipe, FormatDayMonthPipe,
-    AppComponent, HomeComponent, ReduxComponent, LoginComponent, AuthorizedDirective,
+    AppComponent, HomeComponent, WorkspaceComponent, LoginComponent, AuthorizedDirective,
     DialogOverviewExampleDialog, SnackbarComponent,
     CatalogComponent, BranchComponent, TimebarComponent, MapLayersComponent
   ],
@@ -78,7 +78,7 @@ import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
     MatGridListModule, MatSnackBarModule, MatDialogModule, MatProgressSpinnerModule,
     MatCheckboxModule, MatTabsModule
   ],
-  providers: [AppState, DevicesActions, AuthActions, CatalogActions, AuthGuard, TimebarActions, Util],
+  providers: [AppState, WorkspaceActions, AuthActions, CatalogActions, AuthGuard, TimebarActions, Util],
   bootstrap: [AppComponent],
   entryComponents: [DialogOverviewExampleDialog, SnackbarComponent]
 })

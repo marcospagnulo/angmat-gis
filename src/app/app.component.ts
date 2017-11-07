@@ -35,8 +35,8 @@ import { IAppState } from './store/index';
             <mat-icon mat-list-icon>home</mat-icon>
             <span class="text subhead" mat-line>Home</span>
           </button>
-          <button mat-button (click)="goToPage('/redux')" mat-list-item>
-            <mat-icon mat-list-icon>build</mat-icon>
+          <button mat-button (click)="goToPage('/workspace')" mat-list-item>
+            <mat-icon mat-list-icon>map</mat-icon>
             <span class="text subhead" mat-line>Redux</span>
           </button>
           <mat-divider></mat-divider>
@@ -48,7 +48,7 @@ import { IAppState } from './store/index';
       </mat-sidenav>
 
       <!-- Main content-->
-      <div class="app-content">
+      <div class="app-content" [ngClass]="{'below-toolbar': (router.url !== '/home' && router.url !== '/')}">
         <router-outlet></router-outlet>
     </div>
   </mat-sidenav-container>
