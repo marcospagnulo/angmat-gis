@@ -14,7 +14,7 @@ export function AuthReducer(state: Auth = INITIAL_STATE, action: any ): any {
     case 'LOGOUT':
       return Object.assign( {}, state,  {user: action.payload} );
     case 'LOGIN':
-      return Object.assign( {}, state,  {user: action.payload, loginError: false} );
+      return Object.assign( {}, state,  {user: action.payload.user, loginError: false} );
     default: {
       return state;
     }
