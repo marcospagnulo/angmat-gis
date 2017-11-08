@@ -1,0 +1,52 @@
+map-layers{
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  z-index: 999;
+}
+
+map-layers mat-card{
+  padding: 0 !important;
+}
+
+map-layers .title{
+  display: block;
+  padding: 16px 16px 8px 16px;
+}
+
+map-layers map-list-item{
+  background: #FFF;
+}
+
+.map-layers-item{
+  padding: 8px 8px 8px 16px;
+  min-width: 360px;
+}
+
+.map-layers-item.gu-mirror{
+  background-color: #FFF;
+}
+
+.map-layers-item-label {
+  display: block;
+  width: 200px;
+}
+
+.map-layers-item mat-icon, .map-layers-item span{
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.drag-anchor{
+  cursor: -webkit-grab;
+}
+
+.gu-mirror .drag-anchor{
+  cursor: move;
+}
+
+.gu-mirror{
+  opacity: 1 !important;
+  border-radius: 2px;
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+}
