@@ -34,7 +34,7 @@ import { CatalogActions } from '../../actions/catalog.actions';
     </button>
 
     <!-- Catalog node children -->
-    <div #children class="mat-hide">
+    <div #children class="slide-hide">
       <mat-list *ngIf="node.children && open">
         <branch button
           *ngFor="let node of node.children"
@@ -76,6 +76,6 @@ export class BranchComponent implements OnInit {
    */
   toggleNode() {
     this.open = !this.open;
-    this.children.nativeElement.className = this.open ? 'mat-show' : 'mat-hide';
+    this.children.nativeElement.className = this.open ? 'slide-show' : 'slide-hide';
   }
 }
