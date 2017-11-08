@@ -32,10 +32,10 @@ import { Timebar } from '../store/timebar.reducer';
         </mat-tab>
       </mat-tab-group>
 
-      <div>
-        <span class="text body fleft">{{app.selectedTimeslice | HHmm}}</span>
-        <span class="text body fright">{{productionDateText}}</span>
-        <span class="clear"></span>
+      <div class="small-padding-top">
+        <span class="text body">
+          {{app.selectedTimeslice | dayOfWeek}} {{app.selectedTimeslice | ddMM}} {{app.selectedTimeslice | HHmm}}
+        </span>
       </div>
     </mat-card>
 `

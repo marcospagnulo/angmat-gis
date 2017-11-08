@@ -3,6 +3,7 @@ import { Util } from './common/util';
 import { MapKeysPipe } from './common/mapKeysPipe';
 import { FormatHourPipe } from './common/formatHourPipe';
 import { FormatDayMonthPipe } from './common/formatDayMonthPipe';
+import { DayOfWeekPipe } from './common/dayOfWeek';
 import { CatalogActions } from './actions/catalog.actions';
 import { AuthActions } from './actions/auth.actions';
 import { TimebarActions } from './actions/timebar.actions';
@@ -63,7 +64,7 @@ import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
 
 @NgModule({
   declarations: [
-    MapKeysPipe, FormatHourPipe, FormatDayMonthPipe,
+    MapKeysPipe, FormatHourPipe, FormatDayMonthPipe, DayOfWeekPipe,
     AppComponent, HomeComponent, WorkspaceComponent, LoginComponent, AuthorizedDirective,
     DialogOverviewExampleDialog, SnackbarComponent,
     CatalogComponent, BranchComponent, TimebarComponent, MapLayersComponent
