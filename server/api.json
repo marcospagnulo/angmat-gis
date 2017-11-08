@@ -1,0 +1,20 @@
+{
+  "devices": [
+    {
+      "id": 1,
+      "label": "IPhone 88",
+      "price": 600,
+      "ram": 3,
+      "os": "ios",
+      "rate": 5
+    },
+    {
+      "id": 2,
+      "label": "Nexus 6P",
+      "price": 300,
+      "ram": 2,
+      "os": "android",
+      "rate": 3
+    }
+  ]
+}
