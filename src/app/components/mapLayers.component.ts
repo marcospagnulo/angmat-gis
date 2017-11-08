@@ -1,7 +1,7 @@
 import { CatalogActions } from '../actions/catalog.actions';
 import { AppState } from '../app.state';
 import { style } from '@angular/animations';
-import { Component, Input, ViewChild, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { select, NgRedux } from '@angular-redux/store';
 import { IAppState } from '../store/index';
 import { DragulaService } from 'ng2-dragula';
@@ -51,7 +51,7 @@ import { DragulaService } from 'ng2-dragula';
 `
 })
 
-export class MapLayersComponent {
+export class MapLayersComponent implements OnInit {
 
   state = 'maximized';
 
@@ -78,6 +78,15 @@ export class MapLayersComponent {
       catalogActions.reorderSelectedNodes(this.selectedNodes);
     });
 
+  }
+
+  ngOnInit() {
+    this.selectedNodes = [];
+    let i = this.app.selectedNodes.length - 1;
+    for (const node of this.app.selectedNodes) {
+      this.selectedNodes[i] = node;
+      i--;
+    }
   }
 
   /**
