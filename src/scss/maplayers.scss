@@ -5,13 +5,22 @@ map-layers{
   z-index: 999;
 }
 
+map-layers mat-card{
+  padding: 0 !important;
+}
+
+map-layers .title{
+  display: block;
+  padding: 16px 16px 8px 16px;
+}
+
 map-layers map-list-item{
   background: #FFF;
 }
 
 .map-layers-item{
-  padding: 8px 0px 8px 8px;
-  min-width: 300px;
+  padding: 8px 8px 8px 16px;
+  min-width: 360px;
 }
 
 .map-layers-item.gu-mirror{
@@ -20,7 +29,7 @@ map-layers map-list-item{
 
 .map-layers-item-label {
   display: block;
-  width: 150px;
+  width: 200px;
 }
 
 .map-layers-item mat-icon, .map-layers-item span{

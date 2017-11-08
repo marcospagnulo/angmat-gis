@@ -1,7 +1,7 @@
 timebar{
   position: absolute;
-  bottom: 16px;
-  right: 16px;
+  top: 16px;
+  left: 38.5%;
   z-index: 999;
   width: 25%;
   min-width: 350px;
@@ -9,7 +9,8 @@ timebar{
 }
 
 timebar mat-card{
-  height: 100%
+  height: 100%;
+  padding: 8px !important;
 }
 
 timebar .mat-spinner-container {
