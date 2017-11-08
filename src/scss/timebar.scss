@@ -9,6 +9,7 @@ timebar{
 }
 
 timebar mat-card{
+  min-height: 142px;
   height: 100%;
   padding: 8px !important;
 }
@@ -16,6 +17,8 @@ timebar mat-card{
 timebar .mat-spinner-container {
   width: 100%;
   overflow: hidden;
+  height: 142px;
+  padding: 45px 0;
 }
 
 timebar mat-spinner{
@@ -34,5 +37,5 @@ timebar .timebar-days .mat-tab-label{
 
 timebar .timebar-hours .mat-tab-label{
   min-width: 40px !important;
-  padding: 0 8px !important;
+  padding: !important;
 }
