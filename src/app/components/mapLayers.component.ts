@@ -10,11 +10,11 @@ import { DragulaService } from 'ng2-dragula';
   selector: 'map-layers',
   styleUrls: ['../../../node_modules/dragula/dist/dragula.css'],
   template: `
-    <mat-card *ngIf="selectedNodes.length > 0" class="bottom left"
-      [ngClass]="{'minimized': state === 'minimized','maximized': state === 'maximized'}">
+    <mat-card [ngClass]="{'minimized': state === 'minimized','maximized': state === 'maximized',
+      'scale-hide': selectedNodes.length <= 0,'scale-show': selectedNodes.length > 0}">
 
       <!-- Card toggle -->
-      <div class="card-toggle right">
+      <div class="card-toggle">
         <button class="minimize-button" mat-icon-button (click)="toggleSize()">
           <span class="fa text fa-minus"></span>
         </button>

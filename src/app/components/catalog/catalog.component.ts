@@ -7,9 +7,8 @@ import { AppState } from '../../app.state';
 @Component({
   selector: 'catalog',
   template: `
-  <mat-card id="catalog-container" class="top right"
-    [ngClass]="{'minimized': state === 'minimized','maximized': state === 'maximized'}">
-    <div class="card-toggle right">
+  <mat-card id="catalog-container" [ngClass]="{'minimized': state === 'minimized','maximized': state === 'maximized'}">
+    <div class="card-toggle">
       <button class="minimize-button" mat-icon-button (click)="toggleSize()">
         <span class="fa text fa-minus"></span>
       </button>

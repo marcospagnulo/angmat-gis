@@ -13,10 +13,10 @@ import * as L from 'leaflet';
 @Component({
   selector: 'home',
   template: `
-  <catalog></catalog>
+  <catalog class="top right"></catalog>
   <div id="map"></div>
-  <timebar></timebar>
-  <map-layers></map-layers>
+  <timebar class="top center"></timebar>
+  <map-layers class="bottom left"></map-layers>
   `
 })
 
