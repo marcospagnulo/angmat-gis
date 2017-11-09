@@ -62,7 +62,7 @@ export class AppComponent {
 
   @ViewChild('sidenav') sidenav;
 
-  constructor( private ngRedux: NgRedux<IAppState>, public actions: AuthActions, private router: Router, private route: ActivatedRoute,
+  constructor( private ngRedux: NgRedux<IAppState>, public actions: AuthActions, public router: Router, public route: ActivatedRoute,
     public app: AppState ) {
 
   }
