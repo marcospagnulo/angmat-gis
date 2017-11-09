@@ -1,10 +1,10 @@
+import { AppState } from '../app.state';
 import { Auth } from '../store/auth.reducer';
 import { Component, Inject, OnInit } from '@angular/core';
-import { select, NgRedux } from '@angular-redux/store';
 import { IAppState } from '../store/index';
 import { AuthActions } from '../actions/auth.actions';
 import { MatSnackBar } from '@angular/material';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 
 
@@ -81,30 +81,27 @@ export class LoginComponent implements OnInit {
 
   loginInProgress: boolean;
 
-  @select(['auth', 'loginError']) loginError;
-
-  constructor( private ngRedux: NgRedux<IAppState>, public actions: AuthActions,
-    public dialog: MatDialog, public snackBar: MatSnackBar ) { }
+  constructor(public actions: AuthActions, public dialog: MatDialog, public snackBar: MatSnackBar, public app: AppState) { }
 
   ngOnInit() {
-    const that = this;
-    this.loginError.subscribe((loginError: boolean) => {
-      console.log(loginError);
-      setTimeout(function(){
-        that.loginInProgress = false;
-      }, 1000);
+    this.app.onAuthChange.subscribe(auth => {
+      this.loginInProgress = false;
+      if (auth.loginError && auth.loginErrorCode === 403) {
+        console.log();
+        this.openSnackBar('Credenziali errate');
+      } else if (auth.loginError) {
+        this.openSnackBar('Si è verificato un errore');
+      }
     });
   }
 
-  login (data) {
+  login(data) {
     this.loginInProgress = true;
     const login = this.actions.login(data.username, data.password);
   }
 
-  openSnackBar() {
-    this.snackBar.openFromComponent(SnackbarComponent, {
-      duration: 15000,
-    });
+  openSnackBar(text) {
+    this.app.onOpenSnackBar.emit(text);
   }
 
   openDialog(): void {
@@ -115,7 +112,6 @@ export class LoginComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-
     });
   }
 }
@@ -137,11 +133,3 @@ export class DialogOverviewExampleDialog {
   }
 
 }
-
-@Component({
-  selector: 'snack-bar-component-example-snack',
-  template: `
-  <div>Snackbar</div>
-  `
-})
-export class SnackbarComponent {}

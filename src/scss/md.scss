@@ -150,3 +150,32 @@ button mat-spinner {
   display: inline-flex;
   align-items: center;
 }
+
+// Snackbar
+.mat-snackbar-container{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.mat-snackbar{
+  padding: 16px;
+  background-color: #323232;
+  margin: 0 auto;
+  border-radius: 2px;
+  width: 270px;
+  transition: all 0.1s ease-in-out;
+  transform: translateY(100%);
+}
+
+.mat-snackbar.up{
+  transform: translateY(0%);
+}
+
+.mat-snackbar.down{
+  transform: translateY(100%);
+}
+
+.mat-snackbar span{
+  color: rgba(255, 255, 255, 0.87) !important;
+}

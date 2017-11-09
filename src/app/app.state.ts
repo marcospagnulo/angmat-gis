@@ -5,6 +5,7 @@ import { User } from './model/user';
 import { Catalog } from './store/catalog.reducer';
 import { CatalogActions } from './actions/catalog.actions';
 import { Timebar } from './store/timebar.reducer';
+import { Auth } from './store/auth.reducer';
 
 @Injectable()
 export class AppState {
@@ -21,20 +22,27 @@ export class AppState {
   selectedTimeslice: number;
 
   // Events
+  @Output() onAuthChange: EventEmitter<Auth> = new EventEmitter();
+
   @Output() onSelectNodes: EventEmitter<any[]> = new EventEmitter();
 
   @Output() onTimebarLoad: EventEmitter<Timebar> = new EventEmitter();
 
   @Output() onTimesliceSelected: EventEmitter<number> = new EventEmitter();
 
+  @Output() onOpenSnackBar: EventEmitter<string> = new EventEmitter();
 
   constructor (private ngRedux: NgRedux<IAppState>, public catalogActions: CatalogActions) {
 
-    // User subscriber
-    this.ngRedux.select(['auth', 'user']).subscribe((user: User) => {
-      this.user = user;
-      if (user !== null) {
-        catalogActions.loadCatalog(user);
+    // Auth subscriber
+    this.ngRedux.select(['auth']).subscribe((auth: Auth) => {
+
+      this.user = auth.user;
+
+      this.onAuthChange.emit(auth);
+
+      if (this.user !== null) {
+        catalogActions.loadCatalog(this.user);
       }
     });
 

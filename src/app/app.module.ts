@@ -8,7 +8,7 @@ import { CatalogActions } from './actions/catalog.actions';
 import { AuthActions } from './actions/auth.actions';
 import { TimebarActions } from './actions/timebar.actions';
 import { AuthorizedDirective } from './guard/authorized.directive';
-import { DialogOverviewExampleDialog, LoginComponent, SnackbarComponent } from './views/login.component';
+import { LoginComponent } from './views/login.component';
 import { AuthGuard } from './guard/auth.guard';
 import { WorkspaceActions } from './actions/workspace.actions';
 import { AppRoutingModule } from './app.routing.module';
@@ -66,7 +66,6 @@ import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
   declarations: [
     MapKeysPipe, FormatHourPipe, FormatDayMonthPipe, DayOfWeekPipe,
     AppComponent, HomeComponent, WorkspaceComponent, LoginComponent, AuthorizedDirective,
-    DialogOverviewExampleDialog, SnackbarComponent,
     CatalogComponent, BranchComponent, TimebarComponent, MapLayersComponent
   ],
   imports: [
@@ -80,8 +79,7 @@ import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
     MatCheckboxModule, MatTabsModule
   ],
   providers: [AppState, WorkspaceActions, AuthActions, CatalogActions, AuthGuard, TimebarActions, Util],
-  bootstrap: [AppComponent],
-  entryComponents: [DialogOverviewExampleDialog, SnackbarComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 

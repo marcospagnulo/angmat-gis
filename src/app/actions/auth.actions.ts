@@ -51,13 +51,13 @@ export class AuthActions {
         // Login event dispatch
         this.ngRedux.dispatch({
           type: 'LOGIN',
-          payload: { user }
+          payload: { user: user, loginError: false }
         });
       },
       (err) => {
         this.ngRedux.dispatch({
-          type: 'LOGIN_ERROR',
-          payload: true
+          type: 'LOGIN',
+          payload: { user: null, loginError: true, loginErrorCode: err.status }
         });
       }
     );
