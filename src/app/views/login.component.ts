@@ -103,33 +103,4 @@ export class LoginComponent implements OnInit {
   openSnackBar(text) {
     this.app.onOpenSnackBar.emit(text);
   }
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      width: '250px',
-      data: { name: this.username, animal: this.password }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
-  }
-}
-
-@Component({
-  selector: 'dialog-overview-example-dialog',
-  template: `
-  <div>Alert</div>
-  `,
-})
-export class DialogOverviewExampleDialog {
-
-  constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
 }

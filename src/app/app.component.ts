@@ -14,7 +14,7 @@ import { IAppState } from './store/index';
   <mat-sidenav-container>
 
     <!-- Toolbar -->
-    <mat-toolbar color="primary" class="mat-elevation-z6 large-padding" *authorized
+    <mat-toolbar color="primary" class="mat-elevation-z6" *authorized
       [ngClass]="{'floating': (router.url === '/home' || router.url === '/')}" >
       <button mat-icon-button (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
