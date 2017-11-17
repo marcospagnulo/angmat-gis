@@ -1,0 +1,41 @@
+login{
+  width: 300px;
+  margin: auto;
+  height: 400px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+login .mat-card{
+  padding: 0 !important;
+}
+
+.login-header{
+  background-color: #3f51b5;
+  background-image: url("../logo.png");
+  background-position: center 20px;
+  background-size: 100px;
+  background-repeat: no-repeat;
+  height: 160px;
+  text-align: center;
+  position: relative;
+}
+
+.login-header span{
+  display: block;
+  position: absolute;
+  bottom: 16px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+login button, login .mat-form-field{
+  width: 100% !important;
+}
+
+login mat-spinner{
+  margin: 8px auto !important;
+}

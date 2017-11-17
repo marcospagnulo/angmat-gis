@@ -38,10 +38,6 @@ export class AuthActions {
     ).subscribe(
       (data) => {
 
-        // reindirizzo alla pagina richiesta in stato di non autenticazione
-        const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-        this.router.navigateByUrl(returnUrl);
-
         // Recupero il json utente
         const user = data.json();
         user.email = username;

@@ -76,6 +76,15 @@
   opacity: 0;
 }
 
+/* Fade animation for toggle visibility*/
+.fade-show{
+  opacity: 1;
+}
+
+.fade-hide{
+  opacity: 0;
+}
+
 /* Stili e animazioni per i passaggi stato minimizzato/massimizato delle card sulla mappa */
 .card-toggle{
   position: absolute;
@@ -94,7 +103,13 @@
 }
 
 mat-card{
-  transition: padding 0.6s ease, width 0.3s ease, max-height 0.25s ease, border-radius 0.4s ease, background-color 0.4s ease, transform 0.3s ease 0.1s !important;
+  transition: padding 0.6s ease,
+    width 0.3s ease,
+    max-height 0.25s ease,
+    border-radius 0.4s ease,
+    background-color 0.4s ease,
+    opacity 0.3s ease,
+    transform 0.3s ease 0.1s !important;
 }
 
 mat-card.minimized{
@@ -155,6 +170,12 @@ mat-card.minimized{
 
 .app-content.below-toolbar{
   padding-top: 64px;
+}
+
+// Animazione esplosione
+.explode{
+  transform: scale(5);
+  opacity: 0;
 }
 
 #map {
