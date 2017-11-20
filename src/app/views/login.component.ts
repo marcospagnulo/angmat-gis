@@ -89,21 +89,24 @@ export class LoginComponent implements OnInit {
     this.toggleLogin = false;
 
     this.app.onAuthChange.subscribe(auth => {
+
       this.loginInProgress = false;
 
       if (auth.loginError && auth.loginErrorCode === 403) {
         this.openSnackBar('Credenziali errate');
       } else if (auth.loginError) {
         this.openSnackBar('Si è verificato un errore');
+      } else {
+
+        // Parte una animazione "esplosiva" sulla card di login
+        this.explode = true;
+        setTimeout(() => {
+          // reindirizzo alla pagina richiesta in stato di non autenticazione
+          const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+          this.router.navigateByUrl(returnUrl);
+        }, 500);
       }
 
-      // Parte una animazione "esplosiva" sulla card di login
-      this.explode = true;
-      setTimeout(() => {
-        // reindirizzo alla pagina richiesta in stato di non autenticazione
-        const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-        this.router.navigateByUrl(returnUrl);
-      }, 500);
     });
 
     setTimeout(() => {
